@@ -11,7 +11,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to Scheduler!"
+        android:text="@string/welcome"
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
@@ -22,14 +22,14 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/start"
+            android:id="@+id/start_button"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="0.5"
             android:background="@drawable/start_cancel_button_shape"
 
-            android:text="Start Schedule"
+            android:text="@string/start"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,14 +40,14 @@
             app:layout_constraintVertical_bias="0.515" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/cancel"
+            android:id="@+id/cancel_button"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="0.5"
             android:background="@drawable/start_cancel_button_shape"
 
-            android:text="Cancel Schedule"
+            android:text="@string/cancel"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
