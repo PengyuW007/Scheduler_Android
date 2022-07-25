@@ -2,5 +2,9 @@
     <string name="app_name">Scheduler</string>
     <string name="welcome">Welcome to Scheduler</string>
     <string name="start">Start Schedule</string>
-    <string name="cancel">Cancel Schedule</string>
+    <string name="sign_in">Sign in</string>
+    <string name="people">People</string>
+    <string name="shifts">Shifts</string>
+    <string name="next">➡</string>
+    <string name="previous">⬅</string>
 </resources>
