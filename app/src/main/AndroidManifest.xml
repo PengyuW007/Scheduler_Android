@@ -21,6 +21,7 @@
 
         <activity android:name=".presentation.StartScheduleActivity"/>
         <activity android:name=".presentation.SignInActivity"/>
+        <activity android:name=".presentation.ScheduleActivity"/>
 
     </application>
 

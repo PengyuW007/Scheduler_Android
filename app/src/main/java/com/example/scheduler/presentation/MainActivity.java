@@ -28,10 +28,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent();
         if(view.getId()==R.id.start_button){
             intent.setClass(getApplicationContext(),StartScheduleActivity.class);
-            startActivity(intent);
         }else if(view.getId()==R.id.signIn_button){
             intent.setClass(getApplicationContext(), SignInActivity.class);
-            startActivity(intent);
         }
+        startActivity(intent);
     }
 }

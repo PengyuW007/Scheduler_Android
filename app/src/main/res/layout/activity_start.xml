@@ -8,7 +8,7 @@
     tools:context=".presentation.StartScheduleActivity">
 
     <TextView
-        android:id="@+id/people"
+        android:id="@+id/start_text_people"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/people"
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.105" />
 
     <NumberPicker
-        android:id="@+id/people_picker"
+        android:id="@+id/start_numPicker_people"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.25" />
 
     <TextView
-        android:id="@+id/shift"
+        android:id="@+id/start_text_shift"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/shifts"
@@ -47,7 +47,7 @@
         app:layout_constraintVertical_bias="0.534" />
 
     <NumberPicker
-        android:id="@+id/shifts_picker"
+        android:id="@+id/start_numPicker_shifts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +58,7 @@
         app:layout_constraintVertical_bias="0.807" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/next_button"
+        android:id="@+id/start_button_next"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -76,7 +76,7 @@
         app:layout_constraintVertical_bias="0.951" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/previous_button"
+        android:id="@+id/start_button_previous"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="50dp"
         android:layout_height="50dp"
