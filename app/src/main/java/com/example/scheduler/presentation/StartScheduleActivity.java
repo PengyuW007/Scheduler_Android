@@ -13,7 +13,7 @@ import com.example.scheduler.R;
 public class StartScheduleActivity extends AppCompatActivity implements View.OnClickListener {
     TextView people, shifts;
     NumberPicker peoplePicker, shiftsPicker;
-    int num_people, num_shifts;
+    String num_people, num_shifts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +33,11 @@ public class StartScheduleActivity extends AppCompatActivity implements View.OnC
         peoplePicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
-                num_people = newVal;
+                num_people = newVal+"";
                 intent.putExtra("number_of_people",num_people);
             }
         });
+
 
         // Shifts Picker //
         shifts = findViewById(R.id.start_text_shift);//shift picker title
@@ -47,24 +48,28 @@ public class StartScheduleActivity extends AppCompatActivity implements View.OnC
         shiftsPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
-                num_shifts = newVal;
-                intent.putExtra("number_of_Shifts",num_shifts);
+                num_shifts = newVal+"";
+                intent.putExtra("number_of_shifts",num_shifts);
             }
         });// num_shifts, num_people received //
 
-        findViewById(R.id.start_button_next).setOnClickListener(this);
         findViewById(R.id.start_button_previous).setOnClickListener(this);
+        findViewById(R.id.start_button_next).setOnClickListener(this);
     }//end picker
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent();
+
 
         if(view.getId()==R.id.start_button_next){
+            Intent intent = new Intent();
             intent.setClass(getApplicationContext(),ScheduleActivity.class);
+            startActivity(intent);
         }else if(view.getId()==R.id.start_button_previous){
+            Intent intent = new Intent();
             intent.setClass(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
         }
-        startActivity(intent);
+
     }
 }
