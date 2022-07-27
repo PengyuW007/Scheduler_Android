@@ -2,6 +2,7 @@ package com.example.scheduler.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -20,12 +21,25 @@ public class StartScheduleActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        Intent intent =  new Intent(this,ScheduleActivity.class);
-        picker(intent);
+        pickerUI();
 
         findViewById(R.id.start_button_previous).setOnClickListener(this);
         findViewById(R.id.start_button_next).setOnClickListener(this);
     }//end onCreate
+
+    private void pickerUI(){
+        // People Picker //
+        people = findViewById(R.id.start_text_people);//people picker title
+        peoplePicker = (NumberPicker) findViewById(R.id.start_numPicker_people);
+        peoplePicker.setMinValue(0);
+        peoplePicker.setMaxValue(10);
+
+        // Shifts Picker //
+        shifts = findViewById(R.id.start_text_shift);//shift picker title
+        shiftsPicker = (NumberPicker) findViewById(R.id.start_numPicker_shifts);
+        shiftsPicker.setMinValue(0);
+        shiftsPicker.setMaxValue(10);
+    }//end pickerUI
 
     @Override
     public void onClick(View view) {
@@ -39,23 +53,12 @@ public class StartScheduleActivity extends AppCompatActivity implements View.OnC
             intent.setClass(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
-
     }//end onClick
 
     private void picker(Intent intent) {
-        // People Picker //
-        people = findViewById(R.id.start_text_people);//people picker title
-        peoplePicker = (NumberPicker) findViewById(R.id.start_numPicker_people);
-        peoplePicker.setMinValue(0);
-        peoplePicker.setMaxValue(10);
         num_people = peoplePicker.getValue()+"";
         intent.putExtra("number_of_people", num_people);
 
-        // Shifts Picker //
-        shifts = findViewById(R.id.start_text_shift);//shift picker title
-        shiftsPicker = (NumberPicker) findViewById(R.id.start_numPicker_shifts);
-        shiftsPicker.setMinValue(0);
-        shiftsPicker.setMaxValue(10);
         num_shifts = shiftsPicker.getValue()+"";
         intent.putExtra("number_of_shifts", num_shifts);
     }//end picker
