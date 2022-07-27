@@ -1,5 +1,6 @@
 package com.example.scheduler.presentation;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
         showResult();
     }//end onCreate
 
+    //@SuppressLint("SetTextI18n")
     private void showResult(){
         Bundle bundle = getIntent().getExtras();
 
@@ -26,10 +28,13 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
         String shifts = bundle.getString("number_of_shifts");
         Log.i("StartScheduleActivity","Number of shifts: "+shifts);
 
+        /*
         TextView textViewPeople = findViewById(R.id.schedule_people);
         textViewPeople.setText("Number of people: "+people);
         TextView textViewShifts = findViewById(R.id.schedule_shifts);
-        textViewShifts.setText("Number of shifts:"+shifts);
+        textViewShifts.setText("Number of shifts: "+shifts);
+
+         */
     }
 
     @Override
