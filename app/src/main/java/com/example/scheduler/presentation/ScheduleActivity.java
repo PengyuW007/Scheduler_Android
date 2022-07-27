@@ -15,23 +15,21 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
-        //showResult();
+        showResult();
     }//end onCreate
 
     private void showResult(){
         Bundle bundle = getIntent().getExtras();
+
         String people = bundle.getString("number_of_people");
         Log.i("StartScheduleActivity","Number of people: "+people);
         String shifts = bundle.getString("number_of_shifts");
         Log.i("StartScheduleActivity","Number of shifts: "+shifts);
 
-        /*
         TextView textViewPeople = findViewById(R.id.schedule_people);
         textViewPeople.setText("Number of people: "+people);
         TextView textViewShifts = findViewById(R.id.schedule_shifts);
         textViewShifts.setText("Number of shifts:"+shifts);
-
-         */
     }
 
     @Override
