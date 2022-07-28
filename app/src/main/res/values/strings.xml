@@ -7,4 +7,13 @@
     <string name="shifts">Shifts</string>
     <string name="next">➡</string>
     <string name="previous">⬅</string>
+    <string name="schedule">Schedule</string>
+    <string name="Monday">Mon</string>
+    <string name="Tuesday">Tue</string>
+    <string name="Wednesday">Wed</string>
+    <string name="Thursday">Thu</string>
+    <string name="Friday">Fri</string>
+    <string name="Saturday">Sat</string>
+    <string name="Sunday">Sun</string>
+    <string name="save">Save</string>
 </resources>

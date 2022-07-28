@@ -16,7 +16,8 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
-        showResult();
+        //setContentView(R.layout.drafts_schedule);
+        //showResult();
     }//end onCreate
 
     //@SuppressLint("SetTextI18n")
