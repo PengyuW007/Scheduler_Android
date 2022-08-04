@@ -13,14 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class WeekTimeAdapter extends BaseAdapter {
-    Context context;
-    LayoutInflater inflater;
-    ArrayList<String[]>dataList;
+    private Context context;
+    private LayoutInflater inflater;
+    private ArrayList<String[]>dataList;
+    private int[]timeImage;
 
-    public WeekTimeAdapter(Activity activity){
-        super();
-        this.context = activity;
-        this.inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public WeekTimeAdapter(Context context,ArrayList<String[]>dataList,int[]timeImage){
+        this.context = context;
+        this.dataList = dataList;
+        this.timeImage = timeImage;
     }//end WeekTimeAdapter constructor
 
     public void setDataList(ArrayList<String[]>dL){
