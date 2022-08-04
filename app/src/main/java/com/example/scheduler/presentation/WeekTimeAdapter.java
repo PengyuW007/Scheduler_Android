@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.scheduler.R;
+
 import java.util.ArrayList;
 
 public class WeekTimeAdapter extends BaseAdapter {
@@ -49,11 +51,19 @@ public class WeekTimeAdapter extends BaseAdapter {
 
         if(convertView==null){
             viewHolder = new ViewHolder();
+            convertView = inflater.inflate(R.layout.activity_schedule,null);
+            viewHolder.one = (TextView) convertView.findViewById(R.id.one_day);
+            viewHolder.two = (TextView) convertView.findViewById(R.id.two_day);
+            viewHolder.three=(TextView) convertView.findViewById(R.id.three_day);
+            viewHolder.four=(TextView) convertView.findViewById(R.id.four_day);
+            viewHolder.five=(TextView) convertView.findViewById(R.id.five_day);
+            viewHolder.six = (TextView) convertView.findViewById(R.id.six_day);
+            viewHolder.seven = (TextView) convertView.findViewById(R.id.seven_day);
         }
         return null;
     }
 
     private class ViewHolder{
-        private TextView monday,tuesday,wednesday,thursday,friday,saturday,sunday;
+        private TextView one,two,three,four,five,six,seven;
     }
 }
