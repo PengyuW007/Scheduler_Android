@@ -17,16 +17,16 @@ import java.util.ArrayList;
 public class WeekTimeAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
-    private ArrayList<String[]>dataList;
-    private int[]timeImage;
+    private ArrayList<String[]> dataList;
+    private int[] timeImage;
 
-    public WeekTimeAdapter(Context context,ArrayList<String[]>dataList,int[]timeImage){
+    public WeekTimeAdapter(Context context, ArrayList<String[]> dataList, int[] timeImage) {
         this.context = context;
         this.dataList = dataList;
         this.timeImage = timeImage;
     }//end WeekTimeAdapter constructor
 
-    public void setDataList(ArrayList<String[]>dL){
+    public void setDataList(ArrayList<String[]> dL) {
         dataList = dL;
     }
 
@@ -47,23 +47,37 @@ public class WeekTimeAdapter extends BaseAdapter {
 
     @Override
     public View getView(int pos, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
+        ViewHolder viewHolder = new ViewHolder();
 
-        if(convertView==null){
-            viewHolder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.activity_schedule,null);
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.activity_schedule, null);
             viewHolder.one = (TextView) convertView.findViewById(R.id.one_day);
             viewHolder.two = (TextView) convertView.findViewById(R.id.two_day);
-            viewHolder.three=(TextView) convertView.findViewById(R.id.three_day);
-            viewHolder.four=(TextView) convertView.findViewById(R.id.four_day);
-            viewHolder.five=(TextView) convertView.findViewById(R.id.five_day);
+            viewHolder.three = (TextView) convertView.findViewById(R.id.three_day);
+            viewHolder.four = (TextView) convertView.findViewById(R.id.four_day);
+            viewHolder.five = (TextView) convertView.findViewById(R.id.five_day);
             viewHolder.six = (TextView) convertView.findViewById(R.id.six_day);
             viewHolder.seven = (TextView) convertView.findViewById(R.id.seven_day);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        String monday = dataList.get(pos)[0];
+        String tuesday = dataList.get(pos)[1];
+        String wednesday = dataList.get(pos)[2];
+        String thursday = dataList.get(pos)[3];
+        String friday = dataList.get(pos)[4];
+        String saturday = dataList.get(pos)[5];
+        String sunday = dataList.get(pos)[6];
+
+        if(monday.equals("0")){
+            //viewHolder.one.setBackgroundResource(R.mipmap.);
         }
         return null;
     }
 
-    private class ViewHolder{
-        private TextView one,two,three,four,five,six,seven;
+    private class ViewHolder {
+        private TextView one, two, three, four, five, six, seven;
     }
 }
