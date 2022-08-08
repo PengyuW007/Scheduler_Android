@@ -21,6 +21,9 @@ public class WeekTimeAdapter extends BaseAdapter {
     private int[] timeImage;
 
     public WeekTimeAdapter(Context context, ArrayList<String[]> dataList, int[] timeImage) {
+        /****
+         * STRANGE THING HERE!!!!
+         */
         this.context = context;
         this.dataList = dataList;
         this.timeImage = timeImage;
