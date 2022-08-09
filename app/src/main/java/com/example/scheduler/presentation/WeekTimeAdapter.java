@@ -62,6 +62,7 @@ public class WeekTimeAdapter extends BaseAdapter {
             viewHolder.five = (TextView) convertView.findViewById(R.id.five_day);
             viewHolder.six = (TextView) convertView.findViewById(R.id.six_day);
             viewHolder.seven = (TextView) convertView.findViewById(R.id.seven_day);
+
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
