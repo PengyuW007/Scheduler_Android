@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.scheduler.R;
+import com.example.scheduler.business.Checked;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ public class DayTimeAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
     private String operationType;
-    private ArrayList<String[]> dataList;
+    private ArrayList<Checked> dataList;
 
     public DayTimeAdapter(Context context, ArrayList<String[]> dataList, int[] timeImage) {
         super();
@@ -25,7 +26,7 @@ public class DayTimeAdapter extends BaseAdapter {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void setDataList(ArrayList<String[]> dL) {
+    public void setDataList(ArrayList<Checked> dL) {
         dataList = dL;
     }
 
@@ -57,19 +58,38 @@ public class DayTimeAdapter extends BaseAdapter {
         ViewHolder viewHolder = new ViewHolder();
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.outpatient_pattern,null);
-            viewHolder.imageView=(ImageView) convertView.findViewById(R.id.image_one_day);
-            viewHolder.quantum=(TextView) convertView.findViewById(R.id.text_am);
+            convertView = inflater.inflate(R.layout.outpatient_pattern, null);
+            viewHolder.imageView = (ImageView) convertView.findViewById(R.id.image_one_day);
+            viewHolder.quantum = (TextView) convertView.findViewById(R.id.text_am);
 
             convertView.setTag(viewHolder);
-        }else{
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        if(pos%3==0){
+        if (pos % 3 == 0) {
             viewHolder.quantum.setText("am_Morning");
+            if (dataList.get(pos).isChecked()) {
+                viewHolder.imageView.setImageResource(R.mipmap.ico_am);
+            } else {
+                viewHolder.imageView.setImageResource(R.mipmap.ico_seltime);
+            }
+        } else if (pos % 3 == 1) {
+            viewHolder.quantum.setText("pm_Afternoon");
+            if (dataList.get(pos).isChecked()) {
+                viewHolder.imageView.setImageResource(R.mipmap.ico_pm);
+            } else {
+                viewHolder.imageView.setImageResource(R.mipmap.ico_seltime);
+            }
+        }else if(pos%3==2){
+            viewHolder.quantum.setText("am/pm_Midnight");
+            if (dataList.get(pos).isChecked()) {
+                viewHolder.imageView.setImageResource(R.mipmap.ico_night);
+            } else {
+                viewHolder.imageView.setImageResource(R.mipmap.ico_seltime);
+            }
         }
-        return null;
+        return convertView;
     }
 
     public static class ViewHolder {
