@@ -1,53 +1,62 @@
 package com.example.scheduler.presentation;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.scheduler.R;
+//import com.example.scheduler.presentation.WeekTimeAdapter;
+import com.example.scheduler.business.Checked;
+import com.example.scheduler.presentation.DayTimeAdapter;
+
+import java.util.List;
+
 
 public class ScheduleActivity extends AppCompatActivity implements View.OnClickListener {
-    GridView gridView;
-    String[] time_split = {"Morning", "Afternoon", "Night",
-            "Morning", "Afternoon", "Night",
-            "Morning", "Afternoon", "Night",
-            "Morning", "Afternoon", "Night",
-            "Morning", "Afternoon", "Night",
-            "Morning", "Afternoon", "Night",
-            "Morning", "Afternoon", "Night"};
-    int[] time_image = {R.drawable.icon_time_selector, R.drawable.icon_time_selector, R.drawable.icon_time_selector,
-            R.drawable.icon_time_selector, R.drawable.icon_time_selector, R.drawable.icon_time_selector,
-            R.drawable.icon_time_selector, R.drawable.icon_time_selector, R.drawable.icon_time_selector,
-            R.drawable.icon_time_selector, R.drawable.icon_time_selector, R.drawable.icon_time_selector,
-            R.drawable.icon_time_selector, R.drawable.icon_time_selector, R.drawable.icon_time_selector,
-            R.drawable.icon_time_selector, R.drawable.icon_time_selector, R.drawable.icon_time_selector,
-            R.drawable.icon_time_selector, R.drawable.icon_time_selector, R.drawable.icon_time_selector,
-    };
+    private GridView gridView;
+    private DayTimeAdapter dayTimeAdapter;
+    private List<Checked> checkedList;
+    private TextView save;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
-        //showResult();
-        setGridView();
-    }//end onCreate
 
-    public void setGridView() {
-        gridView = findViewById(R.id.schedule_grid);
+        initUI();
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    }
+
+    private void initUI() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar_service);
+
+        gridView = (GridView) findViewById(R.id.schedule_grid);
+
+        save = (TextView) findViewById(R.id.save_work);
+        save.setOnClickListener(this);
+
+        toolbar.setNavigationIcon(R.mipmap.left_m);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
-                Toast.makeText(getApplicationContext(),"You choose: "+time_split[pos],Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                finish();
             }
         });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 
     private void showResult() {
@@ -65,10 +74,5 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
         textViewShifts.setText("Number of shifts: "+shifts);
 
          */
-    }
-
-    @Override
-    public void onClick(View view) {
-
     }
 }
