@@ -1,14 +1,11 @@
 package com.example.scheduler.presentation;
 
-import android.app.Activity;
 import android.content.*;
 import android.view.LayoutInflater;
 import android.view.*;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.scheduler.R;
 

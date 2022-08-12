@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.scheduler.R;
 //import com.example.scheduler.presentation.WeekTimeAdapter;
-import com.example.scheduler.business.Checked;
+import com.example.scheduler.objects.Shift;
 import com.example.scheduler.presentation.DayTimeAdapter;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import java.util.List;
 public class ScheduleActivity extends AppCompatActivity implements View.OnClickListener {
     private GridView gridView;
     private DayTimeAdapter dayTimeAdapter;
-    private List<Checked> checkedList;
+    private List<Shift> checkedList;
     private TextView save;
     private Toolbar toolbar;
 

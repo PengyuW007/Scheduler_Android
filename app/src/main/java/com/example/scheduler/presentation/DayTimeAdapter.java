@@ -9,24 +9,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.scheduler.R;
-import com.example.scheduler.business.Checked;
+import com.example.scheduler.objects.Shift;
 
 import java.util.ArrayList;
 
+/***
+ * Class: DayTimeAdapter
+ *
+ * Purpose: Each unit/cell pattern in the gridview
+ *
+ *
+ */
 public class DayTimeAdapter extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
     private String operationType;
-    private ArrayList<Checked> dataList;
+    private ArrayList<Shift> dataList;
 
-    public DayTimeAdapter(Context context, ArrayList<String[]> dataList, int[] timeImage) {
+    public DayTimeAdapter(Context context, ArrayList<Shift> dataList, int[] timeImage) {
         super();
         this.context = context;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void setDataList(ArrayList<Checked> dL) {
+    public void setDataList(ArrayList<Shift> dL) {
         dataList = dL;
     }
 

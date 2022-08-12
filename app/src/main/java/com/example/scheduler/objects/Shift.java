@@ -1,6 +1,15 @@
 package com.example.scheduler.objects;
 
-//3
+/*****
+ * Class: Shift
+ *
+ * Purpose: This class is to check the status of each day, each time slot
+ *
+ * Parameters:
+ *             1. int: time, the time of the slot, morning, afternoon, or night
+ *             2. boolean: checked, status of slot
+ *
+ *******/
 public class Shift {
     private int am_pm_night;// 0 = am, 1 = pm, 2 = night
     private boolean status;//free or busy, to show the status of the shift
@@ -18,7 +27,7 @@ public class Shift {
         this.am_pm_night = am_pm_night;
     }
 
-    public boolean isStatus() {
+    public boolean isChecked() {
         return status;
     }
 
