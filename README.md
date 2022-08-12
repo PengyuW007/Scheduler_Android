@@ -17,4 +17,6 @@ Work schedule Android app
    [video](https://www.youtube.com/watch?v=YJR8njVHRA4), I added "<item name="windowActionBar">false</item>
    <item name="windowNoTitle">true</item>" into style/theme.xml then changed "<activity> android:name" to:
    " *android:name="com.example.scheduler.presentation.MainActivity" android:label="Activity Title" android:theme="@style/Theme.Scheduler.NoActionBar"* "
+5. [GridView](https://www.runoob.com/w3cnote/android-tutorial-gridview.html) 
+   with outpatient_pattern.xml a single unit pattern and then combined all the units into activity_schedule.xml' s gridview.
    

@@ -14,11 +14,12 @@
         android:layout_alignParentTop="true"
         android:background="#f7f7f8">
 
+
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/schedule_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/green_light"
+            android:background="@color/olive_green"
             android:gravity="center"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
@@ -40,7 +41,7 @@
                 android:gravity="center"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:textColor="#fff"
+                android:textColor="@color/white"
                 android:textSize="21sp" />
         </androidx.appcompat.widget.Toolbar>
 
