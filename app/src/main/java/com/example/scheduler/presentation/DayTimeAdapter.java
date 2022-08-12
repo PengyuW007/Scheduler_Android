@@ -27,7 +27,7 @@ public class DayTimeAdapter extends BaseAdapter {
     private String operationType;
     private ArrayList<Shift> dataList;
 
-    public DayTimeAdapter(Context context, ArrayList<Shift> dataList, int[] timeImage) {
+    public DayTimeAdapter(Context context, ArrayList<Shift> dataList) {
         super();
         this.context = context;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
