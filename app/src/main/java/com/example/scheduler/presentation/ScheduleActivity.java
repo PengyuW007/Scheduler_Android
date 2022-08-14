@@ -78,11 +78,11 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
                 if (!curr.isChecked()) {
                     //free
                     if (pos % 3 == 0) {
-                        curr.setAm_pm_night(0);
+                       // curr.setAm_pm_night(0);
                     } else if (pos % 3 == 1) {
-                        curr.setAm_pm_night(1);
+                        //curr.setAm_pm_night(1);
                     } else if (pos % 3 == 2) {
-                        curr.setAm_pm_night(2);
+                        //curr.setAm_pm_night(2);
                     }
                     curr.setStatus(true);//busy now
                 }else{
