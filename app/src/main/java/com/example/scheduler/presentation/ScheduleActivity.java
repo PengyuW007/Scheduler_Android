@@ -4,7 +4,11 @@ import android.os.Bundle;
 import android.util.Log;
 
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
@@ -24,6 +28,7 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
     private ArrayList<Shift> checkedList;
     private TextView save;
     private Toolbar toolbar;
+    DayTimeAdapter.ViewHolder holder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,7 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
         checkedList = new ArrayList<>();
 
         initUI();
+        updateGrid();
 
     }
 
@@ -57,15 +63,44 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
         /*** Grid ***/
         gridView = (GridView) findViewById(R.id.schedule_grid);
         for (int i = 0; i < 21; i++) {
-            checkedList.add(new Shift(R.mipmap.ico_seltime, 0, false));
+            checkedList.add(new Shift(R.mipmap.ico_seltime, 0));
         }
-        dayTimeAdapter = new DayTimeAdapter(ScheduleActivity.this, checkedList);
 
+        dayTimeAdapter = new DayTimeAdapter(ScheduleActivity.this, checkedList);
         gridView.setAdapter(dayTimeAdapter);
+
+    }//end initUI
+
+    public void updateGrid() {
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
+                holder = (DayTimeAdapter.ViewHolder) view.getTag();
+
+                Shift curr = checkedList.get(pos);
+                if (!curr.isChecked()) {
+                    //free
+                    if (pos % 3 == 0) {
+                        curr.setAm_pm_night(0);
+                    } else if (pos % 3 == 1) {
+                        curr.setAm_pm_night(1);
+                    } else if (pos % 3 == 2) {
+                        curr.setAm_pm_night(2);
+                    }
+                    curr.setStatus(true);//busy now
+                }else{
+                    curr.setStatus(false);
+                }
+
+                dayTimeAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
     public void onClick(View view) {
+
 
     }
 

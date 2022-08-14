@@ -13,13 +13,21 @@ package com.example.scheduler.objects;
 public class Shift {
     private int id;
     private int am_pm_night;// 0 = am, 1 = pm, 2 = night
-    private boolean free;//free or busy, to show the free of the shift
+    private boolean busy;//free or busy, to show the status of the shift
 
 
-    public Shift(int icon_number,int time,boolean free){
+    public Shift(int icon_number, int time) {
         id = icon_number;
         am_pm_night = time;
-        this.free = free;
+        busy = false;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getAm_pm_night() {
@@ -31,10 +39,10 @@ public class Shift {
     }
 
     public boolean isChecked() {
-        return free;
+        return busy;
     }
 
     public void setStatus(boolean free) {
-        this.free = free;
+        this.busy = free;
     }
 }

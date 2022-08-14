@@ -24,7 +24,6 @@ public class DayTimeAdapter extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
-    private String operationType;
     private ArrayList<Shift> dataList;
 
     public DayTimeAdapter(Context context, ArrayList<Shift> dataList) {
@@ -36,14 +35,6 @@ public class DayTimeAdapter extends BaseAdapter {
 
     public void setDataList(ArrayList<Shift> dL) {
         dataList = dL;
-    }
-
-    public String getOperationType() {
-        return operationType;
-    }
-
-    public void setOperationType(String operationType) {
-        this.operationType = operationType;
     }
 
     @Override
@@ -89,7 +80,7 @@ public class DayTimeAdapter extends BaseAdapter {
             } else {
                 viewHolder.imageView.setImageResource(R.mipmap.ico_seltime);
             }
-        }else if(pos%3==2){
+        } else if (pos % 3 == 2) {
             viewHolder.quantum.setText("Midnight");
             if (dataList.get(pos).isChecked()) {
                 viewHolder.imageView.setImageResource(R.mipmap.ico_night);
@@ -97,6 +88,8 @@ public class DayTimeAdapter extends BaseAdapter {
                 viewHolder.imageView.setImageResource(R.mipmap.ico_seltime);
             }
         }
+
+
         return convertView;
     }
 
