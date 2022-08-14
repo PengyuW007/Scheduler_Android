@@ -16,13 +16,12 @@ import com.example.scheduler.objects.Shift;
 import com.example.scheduler.presentation.DayTimeAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class ScheduleActivity extends AppCompatActivity implements View.OnClickListener {
     private GridView gridView;
     private DayTimeAdapter dayTimeAdapter;
-    private List<Shift> checkedList;
+    private ArrayList<Shift> checkedList;
     private TextView save;
     private Toolbar toolbar;
 
@@ -33,15 +32,13 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
 
         checkedList = new ArrayList<>();
 
-
         initUI();
 
     }
 
     private void initUI() {
+        /** Toolbar ***/
         toolbar = (Toolbar) findViewById(R.id.toolbar_service);
-
-        gridView = (GridView) findViewById(R.id.schedule_grid);
 
         save = (TextView) findViewById(R.id.save_work);
         save.setOnClickListener(this);
@@ -56,6 +53,15 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
         });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        /*** Grid ***/
+        gridView = (GridView) findViewById(R.id.schedule_grid);
+        for (int i = 0; i < 21; i++) {
+            checkedList.add(new Shift(R.mipmap.ico_seltime, 0, false));
+        }
+        dayTimeAdapter = new DayTimeAdapter(ScheduleActivity.this, checkedList);
+
+        gridView.setAdapter(dayTimeAdapter);
     }
 
     @Override

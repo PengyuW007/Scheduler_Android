@@ -27,7 +27,6 @@
             android:textColor="#fff"
             android:textSize="20sp" />
 
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_service"
             android:layout_width="match_parent"
@@ -55,8 +54,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
-                <!-- 1 st iteration -->
                 <LinearLayout
                     android:id="@+id/days"
                     android:layout_width="70dp"
@@ -139,9 +136,9 @@
                     android:id="@+id/schedule_grid"
                     android:layout_width="match_parent"
                     android:layout_height="565dp"
+                    android:layout_toEndOf="@+id/days"
                     android:layout_above="@+id/bottom"
                     android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/days"
                     android:numColumns="3"
                     tools:ignore="NestedScrolling" />
 
@@ -158,9 +155,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:padding="10dp">
-
                 </LinearLayout>
-
             </RelativeLayout>
         </ScrollView>
 

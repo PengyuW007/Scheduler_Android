@@ -3,20 +3,23 @@ package com.example.scheduler.objects;
 /*****
  * Class: Shift
  *
- * Purpose: This class is to check the status of each day, each time slot
+ * Purpose: This class is to check the free of each day, each time slot
  *
  * Parameters:
  *             1. int: time, the time of the slot, morning, afternoon, or night
- *             2. boolean: checked, status of slot
+ *             2. boolean: checked, free of slot
  *
  *******/
 public class Shift {
+    private int id;
     private int am_pm_night;// 0 = am, 1 = pm, 2 = night
-    private boolean status;//free or busy, to show the status of the shift
+    private boolean free;//free or busy, to show the free of the shift
 
-    public Shift(int time,boolean status){
+
+    public Shift(int icon_number,int time,boolean free){
+        id = icon_number;
         am_pm_night = time;
-        this.status = status;
+        this.free = free;
     }
 
     public int getAm_pm_night() {
@@ -28,10 +31,10 @@ public class Shift {
     }
 
     public boolean isChecked() {
-        return status;
+        return free;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setStatus(boolean free) {
+        this.free = free;
     }
 }
