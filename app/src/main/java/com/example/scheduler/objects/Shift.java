@@ -11,22 +11,21 @@ package com.example.scheduler.objects;
  *
  *******/
 public class Shift {
-    private int id;
+    //private Person person;
+    private int id;//picture's id
     private int am_pm_night;// 0 = am, 1 = pm, 2 = night
+    private int day;
     private boolean busy;//free or busy, to show the status of the shift
 
     public Shift(int icon_number, int time) {
         id = icon_number;
         am_pm_night = time;
         busy = false;
+        //person = new Person();
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public int getDay(){
+        return 0;
     }
 
     public int getAm_pm_night() {
@@ -43,5 +42,13 @@ public class Shift {
 
     public void setStatus(boolean free) {
         this.busy = free;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

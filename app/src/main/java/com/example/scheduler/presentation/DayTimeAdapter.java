@@ -43,13 +43,13 @@ public class DayTimeAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public Object getItem(int pos) {
+        return dataList.get(pos);
     }
 
     @Override
-    public long getItemId(int i) {
-        return 0;
+    public long getItemId(int pos) {
+        return pos;
     }
 
     @Override
