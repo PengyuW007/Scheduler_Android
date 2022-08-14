@@ -5,10 +5,7 @@ import android.util.Log;
 
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
@@ -17,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.scheduler.R;
 //import com.example.scheduler.presentation.WeekTimeAdapter;
 import com.example.scheduler.objects.Shift;
-import com.example.scheduler.presentation.DayTimeAdapter;
 
 import java.util.ArrayList;
 

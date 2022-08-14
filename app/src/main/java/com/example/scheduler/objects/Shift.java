@@ -15,7 +15,6 @@ public class Shift {
     private int am_pm_night;// 0 = am, 1 = pm, 2 = night
     private boolean busy;//free or busy, to show the status of the shift
 
-
     public Shift(int icon_number, int time) {
         id = icon_number;
         am_pm_night = time;
