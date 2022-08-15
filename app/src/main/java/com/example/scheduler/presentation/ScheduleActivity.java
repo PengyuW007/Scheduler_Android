@@ -59,7 +59,7 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
         /*** Grid ***/
         gridView = (GridView) findViewById(R.id.schedule_grid);
         for (int i = 0; i < 21; i++) {
-            checkedList.add(new Shift(R.mipmap.ico_seltime, 0));
+            checkedList.add(new Shift(R.mipmap.ico_seltime, i));
         }
 
         dayTimeAdapter = new DayTimeAdapter(ScheduleActivity.this, checkedList);
@@ -78,14 +78,14 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
                 if (!curr.isChecked()) {
                     //free
                     if (pos % 3 == 0) {
-                       // curr.setAm_pm_night(0);
+                        curr.setAm_pm_night(0);
                     } else if (pos % 3 == 1) {
-                        //curr.setAm_pm_night(1);
+                        curr.setAm_pm_night(1);
                     } else if (pos % 3 == 2) {
-                        //curr.setAm_pm_night(2);
+                        curr.setAm_pm_night(2);
                     }
                     curr.setStatus(true);//busy now
-                }else{
+                } else {
                     curr.setStatus(false);
                 }
 
