@@ -67,21 +67,18 @@ public class DayTimeAdapter extends BaseAdapter {
         }
 
         if (pos % 3 == 0) {
-            viewHolder.quantum.setText("Morning");
             if (dataList.get(pos).isChecked()) {
                 viewHolder.imageView.setImageResource(R.mipmap.ico_am);
             } else {
                 viewHolder.imageView.setImageResource(R.mipmap.ico_seltime);
             }
         } else if (pos % 3 == 1) {
-            viewHolder.quantum.setText("Afternoon");
             if (dataList.get(pos).isChecked()) {
                 viewHolder.imageView.setImageResource(R.mipmap.ico_pm);
             } else {
                 viewHolder.imageView.setImageResource(R.mipmap.ico_seltime);
             }
         } else if (pos % 3 == 2) {
-            viewHolder.quantum.setText("Midnight");
             if (dataList.get(pos).isChecked()) {
                 viewHolder.imageView.setImageResource(R.mipmap.ico_night);
             } else {

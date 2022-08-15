@@ -12,11 +12,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.scheduler.R;
-//import com.example.scheduler.presentation.WeekTimeAdapter;
 import com.example.scheduler.objects.Shift;
 
 import java.util.ArrayList;
-
 
 public class ScheduleActivity extends AppCompatActivity implements View.OnClickListener {
     private GridView gridView;
@@ -86,6 +84,7 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
                     }
                     curr.setStatus(true);//busy now
                 } else {
+                    //busy
                     curr.setStatus(false);
                 }
 

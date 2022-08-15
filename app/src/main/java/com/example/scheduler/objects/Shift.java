@@ -6,8 +6,8 @@ package com.example.scheduler.objects;
  * Purpose: This class is to check the free of each day, each time slot
  *
  * Parameters:
- *             1. int: time, the time of the slot, morning, afternoon, or night
- *             2. boolean: checked, free of slot
+ *             1. int: icon_number, id of icon in drawable
+ *             2. int: pos, position in Shift array
  *
  *******/
 public class Shift {
