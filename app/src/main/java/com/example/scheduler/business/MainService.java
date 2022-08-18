@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class MainService {
     private ArrayList<Person> people;
     private PersonPersistence db;
-    MainService ms;
+    private MainService ms;
 
     public MainService(){
         people = db.getPeople();
