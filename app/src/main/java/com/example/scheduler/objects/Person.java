@@ -4,14 +4,16 @@ import java.util.ArrayList;
 
 public class Person {
     private String name;
+    private String group;
     private ArrayList<Shift> workList;
-    private String status;// administrator or normal user
+    private boolean admin;// administrator or normal user
     private String password;
 
-    public Person(String name, String password, String status) {
+    public Person(String name, String password,String group) {
         this.name = name;
+        this.group = group;
         workList = new ArrayList<>();
-        this.status = status;
+        admin = false;
         this.password = password;
     }
 
@@ -31,12 +33,12 @@ public class Person {
         this.workList = workList;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(boolean status) {
+        admin = status;
     }
 
-    public String getStatus() {
-        return status;
+    public boolean getStatus() {
+        return admin;
     }
 
     public String getPassword() {
