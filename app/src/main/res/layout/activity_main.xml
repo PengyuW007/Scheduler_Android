@@ -34,14 +34,14 @@
         app:layout_constraintVertical_bias="0.371" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/start_button"
+        android:id="@+id/register_button"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_weight="0.5"
         android:background="@drawable/start_page_button_shape"
 
-        android:text="@string/start"
+        android:text="@string/register"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

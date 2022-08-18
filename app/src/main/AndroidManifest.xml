@@ -13,8 +13,10 @@
         tools:ignore="AllowBackup">
 
         <activity
-            android:name="com.example.scheduler.presentation.MainActivity" android:label="Activity Title" android:theme="@style/Theme.Scheduler.NoActionBar"
-            android:exported="true">
+            android:name="com.example.scheduler.presentation.MainActivity"
+            android:exported="true"
+            android:label="Activity Title"
+            android:theme="@style/Theme.Scheduler.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,10 +24,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".presentation.StartScheduleActivity"/>
-        <activity android:name=".presentation.SignInActivity"/>
-        <activity android:name=".presentation.ScheduleActivity"/>
-
+        <activity android:name=".presentation.StartScheduleActivity" />
+        <activity android:name=".presentation.SignInActivity" />
+        <activity android:name=".presentation.ScheduleActivity" />
+        <activity android:name=".presentation.RegisterActivity" />
     </application>
 
 </manifest>

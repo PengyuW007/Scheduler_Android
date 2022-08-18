@@ -19,15 +19,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initializeUI() {
         // Button reactions //
-        findViewById(R.id.start_button).setOnClickListener(this);
+        findViewById(R.id.register_button).setOnClickListener(this);
         findViewById(R.id.signIn_button).setOnClickListener(this);
     }//end initializeUI
 
     @Override
     public void onClick(View view) {
         Intent intent = new Intent();
-        if(view.getId()==R.id.start_button){
-            intent.setClass(getApplicationContext(),StartScheduleActivity.class);
+        if(view.getId()==R.id.register_button){
+            intent.setClass(getApplicationContext(),RegisterActivity.class);
         }else if(view.getId()==R.id.signIn_button){
             intent.setClass(getApplicationContext(), SignInActivity.class);
         }

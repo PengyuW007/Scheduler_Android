@@ -19,4 +19,4 @@ Work schedule Android app
    " *android:name="com.example.scheduler.presentation.MainActivity" android:label="Activity Title" android:theme="@style/Theme.Scheduler.NoActionBar"* "
 5. [GridView](https://www.runoob.com/w3cnote/android-tutorial-gridview.html) 
    with outpatient_pattern.xml a single unit pattern and then combined all the units into activity_schedule.xml' s gridview.
-   
+6. [Structure of Clinic](https://www.motherchildren.com/depart_yixuejianyankea0_zuzhij/)

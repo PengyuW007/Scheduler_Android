@@ -16,4 +16,18 @@
     <string name="Saturday">Sat</string>
     <string name="Sunday">Sun</string>
     <string name="save">Save</string>
+    <string name="confirm">Confirm</string>
+    <string name="sign_up">Sign up</string>
+    <string name="register">Register</string>
+    <string name="section">Section</string>
+
+    <string-array name="sections">
+        <item>微生物组 /Microbiology</item>
+        <item>免疫组 /Immunology</item>
+        <item>分子生物组 /Molecular Biology</item>
+        <item>生化组 /Biochemistry</item>
+        <item>血库组 /Supplement Blood Bank</item>
+        <item>检验组 /Laboratory Medical Test</item>
+        <item>样本处理组 /Sample Processing</item>
+    </string-array>
 </resources>
