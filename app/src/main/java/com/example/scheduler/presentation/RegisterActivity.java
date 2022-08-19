@@ -19,7 +19,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private TextView section;
     private EditText name, password;
     private Button confirm;
-    private String nameGet, passwordGet,sectionGet;
+    private String nameGet, passwordGet, sectionGet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +29,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         initUI();
 
-        findViewById(R.id.signUp_username_text).setOnClickListener(this);
-        findViewById(R.id.signUp_password_text).setOnClickListener(this);
-        findViewById(R.id.signUp_login_button).setOnClickListener(this);
+        name.setOnClickListener(this);
+        password.setOnClickListener(this);
+        confirm.setOnClickListener(this);
     }
 
     private void initUI() {
@@ -52,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(this, MainActivity.class);
-        if(view.getId()==R.id.signUp_login_button){
+        if (view.getId() == R.id.signUp_login_button) {
             dataReceived(intent);
             startActivity(intent);
         }
@@ -62,14 +62,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         /*** Edit text ***/
         nameGet = name.getText().toString();
         passwordGet = password.getText().toString();
-        Log.i("name_here",nameGet);
-        Log.i("password_here",passwordGet);
+        Log.i("name_here", nameGet);
+        Log.i("password_here", passwordGet);
 
-        sectionGet =sections[sectionsPicker.getValue()];
-        Log.i("section_here",sectionGet);
+        sectionGet = sections[sectionsPicker.getValue()];
+        Log.i("section_here", sectionGet);
 
-        intent.putExtra("name_receive",nameGet);
-        intent.putExtra("password_receive",passwordGet);
-        intent.putExtra("section_receive",sectionGet);
+        intent.putExtra("register_name_receive", nameGet);
+        intent.putExtra("register_password_receive", passwordGet);
+        intent.putExtra("register_section_receive", sectionGet);
     }
 }

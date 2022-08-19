@@ -20,6 +20,11 @@
     <string name="sign_up">Sign up</string>
     <string name="register">Register</string>
     <string name="section">Section</string>
+    <string name="admin">管理员 /Admin</string>
+    <string name="forget_password">Forget password?</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
 
     <string-array name="sections">
         <item>微生物组 /Microbiology</item>
@@ -29,5 +34,10 @@
         <item>血库组 /Supplement Blood Bank</item>
         <item>检验组 /Laboratory Medical Test</item>
         <item>样本处理组 /Sample Processing</item>
+    </string-array>
+    
+    <string-array name="Admin">
+        <item>是 /Yes</item>
+        <item>否 /No</item>
     </string-array>
 </resources>
