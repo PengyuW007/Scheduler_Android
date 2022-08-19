@@ -2,7 +2,6 @@ package com.example.scheduler.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -12,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.scheduler.R;
 
 public class StartScheduleActivity extends AppCompatActivity implements View.OnClickListener {
-    TextView people, shifts;
-    NumberPicker peoplePicker, shiftsPicker;
-    String num_people, num_shifts;
+    private TextView people, shifts;
+    private NumberPicker peoplePicker, shiftsPicker;
+    private String num_people, num_shifts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
