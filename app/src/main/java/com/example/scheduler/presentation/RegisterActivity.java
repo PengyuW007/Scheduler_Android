@@ -16,7 +16,6 @@ import com.example.scheduler.R;
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     private String[] sections;
     private NumberPicker sectionsPicker;
-    private TextView section;
     private EditText name, password;
     private Button confirm;
     private String nameGet, passwordGet, sectionGet;
@@ -39,7 +38,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         name = (EditText) findViewById(R.id.signUp_username_text);
         password = (EditText) findViewById(R.id.signUp_password_text);
         /*** Number picker ***/
-        section = findViewById(R.id.text_section_picker);
         sectionsPicker = (NumberPicker) findViewById(R.id.number_picker_sections);
         sectionsPicker.setMinValue(0);
         sectionsPicker.setMaxValue(6);
@@ -67,6 +65,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         sectionGet = sections[sectionsPicker.getValue()];
         Log.i("section_here", sectionGet);
+
+
 
         intent.putExtra("register_name_receive", nameGet);
         intent.putExtra("register_password_receive", passwordGet);
