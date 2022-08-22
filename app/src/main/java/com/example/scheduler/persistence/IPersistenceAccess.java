@@ -4,7 +4,7 @@ import com.example.scheduler.objects.Person;
 
 import java.util.ArrayList;
 
-public interface IPersonPersistence {
+public interface IPersistenceAccess {
     /*******************************************************/
     /************************* CRUD ************************/
     /*******************************************************/

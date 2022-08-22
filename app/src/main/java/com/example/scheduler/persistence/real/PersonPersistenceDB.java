@@ -1,11 +1,16 @@
 package com.example.scheduler.persistence.real;
 
 import com.example.scheduler.objects.Person;
-import com.example.scheduler.persistence.IPersonPersistence;
+import com.example.scheduler.persistence.IPersistenceAccess;
 
 import java.util.ArrayList;
 
-public class PersonPersistenceHSQLDB implements IPersonPersistence {
+public class PersonPersistenceDB implements IPersistenceAccess {
+    private final String DBPATH;
+
+    public PersonPersistenceDB(String dbPath){
+        DBPATH = dbPath;
+    }
 
     @Override
     public int addPerson(String name, String password, String group) {

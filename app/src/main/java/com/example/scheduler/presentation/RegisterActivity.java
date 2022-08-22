@@ -57,12 +57,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void dataReceived(Intent intent) {
-        /*** Edit text ***/
+        /*** data received ***/
         nameGet = name.getText().toString();
         passwordGet = password.getText().toString();
         Log.i("name_here", nameGet);
         Log.i("password_here", passwordGet);
-
         sectionGet = sections[sectionsPicker.getValue()];
         Log.i("section_here", sectionGet);
 

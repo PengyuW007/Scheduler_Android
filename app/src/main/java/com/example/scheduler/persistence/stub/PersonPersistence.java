@@ -1,11 +1,11 @@
 package com.example.scheduler.persistence.stub;
 
 import com.example.scheduler.objects.Person;
-import com.example.scheduler.persistence.IPersonPersistence;
+import com.example.scheduler.persistence.IPersistenceAccess;
 
 import java.util.ArrayList;
 
-public class PersonPersistence implements IPersonPersistence {
+public class PersonPersistence implements IPersistenceAccess {
     private ArrayList<Person> people;
 
     public PersonPersistence() {
@@ -77,6 +77,7 @@ public class PersonPersistence implements IPersonPersistence {
         Person p4 = new Person("D", "d", "2");
         Person p5 = new Person("E", "e", "2");
         Person p6 = new Person("F", "f", "3");
+
         people.add(p1);
         people.add(p2);
         people.add(p3);
