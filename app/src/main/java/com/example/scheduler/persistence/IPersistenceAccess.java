@@ -8,22 +8,18 @@ public interface IPersistenceAccess {
     /*******************************************************/
     /************************* CRUD ************************/
     /*******************************************************/
-
+    void open(String dbPath);
     /*** CREATE ***/
-    int addPerson(String name, String password, String group);
+    int addElement(String label);
 
     /*** READ ***/
-    Person getPersonByName(String name);
+    Object getElementByInfo(String label);
 
-    ArrayList<Person> getPeople();
+    ArrayList<Object> getElement();
 
     /*** UPDATE ***/
-    void rename(String name, String newName);
-
-    void rePassword(String name, String newPassword);
-
-    void reStatus(String name, boolean admin);
+    void updateInfo(String label, String newLabel);
 
     /*** DELETE ***/
-    boolean deletePerson(String name);
+    boolean deleteElement(String label);
 }

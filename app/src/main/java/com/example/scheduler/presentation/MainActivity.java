@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
+
+
     public static void setDBPathName(String pathName) {
         //actually,set dbPath
         dbPath = pathName;

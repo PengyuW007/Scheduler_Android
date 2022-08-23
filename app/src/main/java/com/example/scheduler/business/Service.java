@@ -8,14 +8,18 @@ import com.example.scheduler.presentation.MainActivity;
 public class Service {
     private static IPersistenceAccess access = null;
 
-    public static IPersistenceAccess createAccess(boolean real){
-        if(access==null){
-            //for real DB or fake DB
-            if(real){
-                access = new PersonPersistenceDB(MainActivity.getDBPathName());
-            }else{
-                access = new PersonPersistence();
-            }
+    public static IPersistenceAccess createAccess(String dbName) {
+        if (access == null) {
+            access = new PersonPersistenceDB(dbName);
+            access.open(MainActivity.getDBPathName());
+        }
+        return access;
+    }
+
+    public static IPersistenceAccess createAccess(IPersistenceAccess alternate) {
+        if (access == null) {
+            access = alternate;
+            access.open(MainActivity.getDBPathName());
         }
         return access;
     }//end createAccess

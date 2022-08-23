@@ -10,18 +10,17 @@ public class PersonPersistence implements IPersistenceAccess {
 
     public PersonPersistence() {
         people = new ArrayList<>();
-        setDB();
     }
 
-    /*** Logic operations ***/
-    @Override
+    /***********************
+     *** Logic operations ***
+     ************************/
     public int addPerson(String name, String password, String group) {
         Person person = new Person(name, password, group);
         people.add(person);
         return people.size();
     }
 
-    @Override
     public Person getPersonByName(String name) {
         Person res = null;
         int len = people.size();
@@ -34,25 +33,21 @@ public class PersonPersistence implements IPersistenceAccess {
         return res;
     }
 
-    @Override
     public void rename(String name, String newName) {
         Person curr = getPersonByName(name);
         curr.setName(newName);
     }
 
-    @Override
     public void rePassword(String name, String newPassword) {
         Person curr = getPersonByName(name);
         curr.setPassword(newPassword);
     }
 
-    @Override
     public void reStatus(String name, boolean status) {
         Person curr = getPersonByName(name);
         curr.setStatus(status);
     }
 
-    @Override
     public boolean deletePerson(String name) {
         boolean delete = false;
 
@@ -65,12 +60,15 @@ public class PersonPersistence implements IPersistenceAccess {
         return delete;
     }
 
-    @Override
     public ArrayList<Person> getPeople() {
         return people;
     }
 
-    private void setDB() {
+    /***********************
+     *** Override methods ***
+     * *********************/
+    @Override
+    public void open(String dbPath) {
         Person p1 = new Person("A", "a", "1");
         Person p2 = new Person("B", "b", "1");
         Person p3 = new Person("C", "c", "1");
@@ -84,5 +82,30 @@ public class PersonPersistence implements IPersistenceAccess {
         people.add(p4);
         people.add(p5);
         people.add(p6);
+    }
+
+    @Override
+    public int addElement(String label) {
+        return 0;
+    }
+
+    @Override
+    public Object getElementByInfo(String label) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Object> getElement() {
+        return null;
+    }
+
+    @Override
+    public void updateInfo(String label, String newLabel) {
+
+    }
+
+    @Override
+    public boolean deleteElement(String label) {
+        return false;
     }
 }
