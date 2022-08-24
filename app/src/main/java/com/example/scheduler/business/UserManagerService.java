@@ -18,7 +18,7 @@ public class UserManagerService {
         return person;
     }
 
-    public Person getPersonByName(String name) {
+    public Person getUserByName(String name) {
         return access.getPersonByName(name);
     }
 
