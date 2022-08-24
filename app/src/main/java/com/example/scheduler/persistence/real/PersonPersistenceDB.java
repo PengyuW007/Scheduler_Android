@@ -57,30 +57,5 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         System.out.println("RealDB portal closed.");
     }
 
-    @Override
-    public int addElement(String label) {
-        return 0;
-    }
-
-    @Override
-    public Object getElementByInfo(String label) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Object> getElement() {
-        return null;
-    }
-
-    @Override
-    public void updateInfo(String label, String newLabel) {
-
-    }
-
-    @Override
-    public boolean deleteElement(String label) {
-        return false;
-    }
-
 
 }

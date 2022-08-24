@@ -18,8 +18,7 @@ public class PersonPersistence implements IPersonPersistence {
 
     /*** CREATE ***/
     @Override
-    public int addPerson(String name, String password, String group) {
-        Person person = new Person(name, password, group);
+    public int addPerson(Person person) {
         people.add(person);
         return people.size();
     }

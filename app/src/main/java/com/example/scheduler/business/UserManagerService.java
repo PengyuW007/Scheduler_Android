@@ -4,6 +4,8 @@ import com.example.scheduler.objects.Person;
 import com.example.scheduler.persistence.IPersonPersistence;
 import com.example.scheduler.presentation.MainActivity;
 
+import java.util.ArrayList;
+
 public class UserManagerService {
     private final IPersonPersistence access;
 
@@ -11,9 +13,9 @@ public class UserManagerService {
         access = (IPersonPersistence) Service.getAccess(MainActivity.getDBPathName());
     }
 
-    public Person addUser(String name, String password, String group) {
-        access.addPerson(name, password, group);
-        return access.getPersonByName(name);
+    public Person addUser(Person person) {
+        access.addPerson(person);
+        return person;
     }
 
     public Person getPersonByName(String name) {
@@ -41,5 +43,9 @@ public class UserManagerService {
 
     public boolean deleteUser(String name) {
         return access.deletePerson(name);
+    }
+
+    public ArrayList<Person>getPeople(){
+        return access.getPeople();
     }
 }

@@ -10,7 +10,7 @@ public interface IPersonPersistence extends IPersistenceAccess {
     /*******************************************************/
 
     /*** CREATE ***/
-    int addPerson(String name, String password, String group);
+    int addPerson(Person person);
 
     /*** READ ***/
     Person getPersonByName(String name);
