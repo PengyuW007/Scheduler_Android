@@ -7,6 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.scheduler.R;
+import com.example.scheduler.business.Service;
+import com.example.scheduler.objects.Person;
+import com.example.scheduler.persistence.real.PersonPersistenceDB;
+import com.example.scheduler.persistence.stub.PersonPersistence;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String dbName = "Scheduler";
@@ -16,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //startDB();
+        startStubDB();
         initializeUI();
     }
 
@@ -36,7 +44,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
+    private static void startDB(){
+        Service.createAccess(dbPath);
+    }
 
+    private static void startStubDB(){
+        PersonPersistence p=new PersonPersistence();
+        Service.createAccess(p);
+    }
 
     public static void setDBPathName(String pathName) {
         //actually,set dbPath
@@ -53,4 +68,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return res;
     }
+
 }

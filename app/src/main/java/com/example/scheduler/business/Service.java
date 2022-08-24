@@ -14,7 +14,7 @@ public class Service {
             access.open(MainActivity.getDBPathName());
         }
         return access;
-    }
+    }//end createAccess
 
     public static IPersistenceAccess createAccess(IPersistenceAccess alternate) {
         if (access == null) {
@@ -23,5 +23,19 @@ public class Service {
         }
         return access;
     }//end createAccess
+
+    public static IPersistenceAccess getAccess(String dbName){
+        if(access==null){
+            throw new RuntimeException("Connection failed to "+dbName +" data access.");
+        }
+        return access;
+    }//end getAccess
+
+    public static void closeAccess(){
+        if(access!=null){
+            access.close();
+        }
+        access=null;//set it to null to close
+    }
 
 }

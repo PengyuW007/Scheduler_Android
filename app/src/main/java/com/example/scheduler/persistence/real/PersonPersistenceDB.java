@@ -49,7 +49,12 @@ public class PersonPersistenceDB implements IPersistenceAccess {
 
     @Override
     public void open(String dbPath) {
+        System.out.println(dbPath+"(realDB) connection has established successfully.");
+    }
 
+    @Override
+    public void close() {
+        System.out.println("RealDB portal closed.");
     }
 
     @Override

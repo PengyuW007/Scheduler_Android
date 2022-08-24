@@ -1,14 +1,16 @@
 package com.example.scheduler.persistence;
 
-import com.example.scheduler.objects.Person;
-
 import java.util.ArrayList;
 
 public interface IPersistenceAccess {
+    /*** Data Access ***/
+    void open(String dbPath);
+    void close();
+
     /*******************************************************/
     /************************* CRUD ************************/
     /*******************************************************/
-    void open(String dbPath);
+
     /*** CREATE ***/
     int addElement(String label);
 

@@ -1,11 +1,11 @@
 package com.example.scheduler.persistence.stub;
 
 import com.example.scheduler.objects.Person;
-import com.example.scheduler.persistence.IPersistenceAccess;
+import com.example.scheduler.persistence.IPersonPersistence;
 
 import java.util.ArrayList;
 
-public class PersonPersistence implements IPersistenceAccess {
+public class PersonPersistence implements IPersonPersistence {
     private ArrayList<Person> people;
 
     public PersonPersistence() {
@@ -13,14 +13,17 @@ public class PersonPersistence implements IPersistenceAccess {
     }
 
     /***********************
-     *** Logic operations ***
+     *** Logic operations
+     ********* CRUD********
      ************************/
+    @Override
     public int addPerson(String name, String password, String group) {
         Person person = new Person(name, password, group);
         people.add(person);
         return people.size();
     }
 
+    @Override
     public Person getPersonByName(String name) {
         Person res = null;
         int len = people.size();
@@ -33,21 +36,25 @@ public class PersonPersistence implements IPersistenceAccess {
         return res;
     }
 
+    @Override
     public void rename(String name, String newName) {
         Person curr = getPersonByName(name);
         curr.setName(newName);
     }
 
+    @Override
     public void rePassword(String name, String newPassword) {
         Person curr = getPersonByName(name);
         curr.setPassword(newPassword);
     }
 
+    @Override
     public void reStatus(String name, boolean status) {
         Person curr = getPersonByName(name);
         curr.setStatus(status);
     }
 
+    @Override
     public boolean deletePerson(String name) {
         boolean delete = false;
 
@@ -67,6 +74,7 @@ public class PersonPersistence implements IPersistenceAccess {
     /***********************
      *** Override methods ***
      * *********************/
+
     @Override
     public void open(String dbPath) {
         Person p1 = new Person("A", "a", "1");
@@ -82,6 +90,13 @@ public class PersonPersistence implements IPersistenceAccess {
         people.add(p4);
         people.add(p5);
         people.add(p6);
+
+        System.out.println(dbPath + " has established successfully.");
+    }
+
+    @Override
+    public void close() {
+        System.out.println("DB portal closed.");
     }
 
     @Override
@@ -104,7 +119,7 @@ public class PersonPersistence implements IPersistenceAccess {
 
     }
 
-    @Override
+
     public boolean deleteElement(String label) {
         return false;
     }
