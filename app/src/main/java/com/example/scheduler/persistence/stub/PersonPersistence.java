@@ -12,10 +12,11 @@ public class PersonPersistence implements IPersonPersistence {
         people = new ArrayList<>();
     }
 
-    /***********************
-     *** Logic operations
-     ********* CRUD********
-     ************************/
+    /*******************************************************/
+    /************************* CRUD ************************/
+    /*******************************************************/
+
+    /*** CREATE ***/
     @Override
     public int addPerson(String name, String password, String group) {
         Person person = new Person(name, password, group);
@@ -23,6 +24,7 @@ public class PersonPersistence implements IPersonPersistence {
         return people.size();
     }
 
+    /*** READ ***/
     @Override
     public Person getPersonByName(String name) {
         Person res = null;
@@ -36,6 +38,26 @@ public class PersonPersistence implements IPersonPersistence {
         return res;
     }
 
+    @Override
+    public ArrayList<Person> getPeople() {
+        return people;
+    }
+
+    @Override
+    public boolean isUnique(String name, String group) {
+        boolean unique = false;
+        int len = people.size();
+        for (int i = 0; i < len; i++) {
+            Person curr = people.get(i);
+            if (!curr.getName().equalsIgnoreCase("name")
+                    && !curr.getGroup().equalsIgnoreCase("group")) {
+                unique = true;
+            }
+        }
+        return unique;
+    }
+
+    /*** UPDATE ***/
     @Override
     public void rename(String name, String newName) {
         Person curr = getPersonByName(name);
@@ -54,6 +76,7 @@ public class PersonPersistence implements IPersonPersistence {
         curr.setStatus(status);
     }
 
+    /*** DELETE ***/
     @Override
     public boolean deletePerson(String name) {
         boolean delete = false;
@@ -67,9 +90,6 @@ public class PersonPersistence implements IPersonPersistence {
         return delete;
     }
 
-    public ArrayList<Person> getPeople() {
-        return people;
-    }
 
     /***********************
      *** Override methods ***
@@ -97,30 +117,5 @@ public class PersonPersistence implements IPersonPersistence {
     @Override
     public void close() {
         System.out.println("DB portal closed.");
-    }
-
-    @Override
-    public int addElement(String label) {
-        return 0;
-    }
-
-    @Override
-    public Object getElementByInfo(String label) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Object> getElement() {
-        return null;
-    }
-
-    @Override
-    public void updateInfo(String label, String newLabel) {
-
-    }
-
-
-    public boolean deleteElement(String label) {
-        return false;
     }
 }

@@ -12,8 +12,6 @@ import com.example.scheduler.objects.Person;
 import com.example.scheduler.persistence.real.PersonPersistenceDB;
 import com.example.scheduler.persistence.stub.PersonPersistence;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String dbName = "Scheduler";
     private static String dbPath = "database/Scheduler";
