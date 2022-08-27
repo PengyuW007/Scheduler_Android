@@ -56,20 +56,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         if (view.getId() == R.id.signUp_login_button) {
-            dataReceived(intent);
+            dataReceivedDB(intent);
             startActivity(intent);
-        }
-    }
-
-    private void dataReceived(Intent intent) {
-        String nameStr = "AA", passwordStr = "aa", groupGet = "11";
-        boolean isUnique = userService.isUnique(nameStr, groupGet);
-
-        System.out.println("Size before: "+userService.getPeople().size());
-        if (isUnique) {
-            Person person = new Person(nameStr, passwordStr, groupGet);
-            userService.addUser(person);
-            System.out.println("Size after: "+userService.getPeople().size());
         }
     }
 
@@ -94,5 +82,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             intent.putExtra("register_section_receive", sectionGet);
         }
 
+    }
+
+    private void dataReceived(Intent intent) {
+        String nameStr = "AA", passwordStr = "aa", groupGet = "11";
+        boolean isUnique = userService.isUnique(nameStr, groupGet);
+
+        System.out.println("Size before: "+userService.getPeople().size());
+        if (isUnique) {
+            Person person = new Person(nameStr, passwordStr, groupGet);
+            userService.addUser(person);
+            System.out.println("Size after: "+userService.getPeople().size());
+        }
     }
 }

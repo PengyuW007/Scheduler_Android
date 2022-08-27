@@ -10,7 +10,7 @@ public class UserManagerService {
     private final IPersonPersistence access;
 
     public UserManagerService() {
-        access = (IPersonPersistence) Service.getAccess(MainActivity.getDBPathName());
+        access = null;
     }
 
     public Person addUser(Person person) {

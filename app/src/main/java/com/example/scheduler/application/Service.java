@@ -1,4 +1,4 @@
-package com.example.scheduler.business;
+package com.example.scheduler.application;
 
 import com.example.scheduler.persistence.IPersistenceAccess;
 import com.example.scheduler.persistence.real.PersonPersistenceDB;
@@ -11,7 +11,7 @@ public class Service {
     public static IPersistenceAccess createAccess(String dbName) {
         if (access == null) {
             access = new PersonPersistenceDB(dbName);
-            access.open(MainActivity.getDBPathName());
+            access.open(Main.getDBPathName());
         }
         return access;
     }//end createAccess
@@ -19,23 +19,24 @@ public class Service {
     public static IPersistenceAccess createAccess(IPersistenceAccess alternate) {
         if (access == null) {
             access = alternate;
-            access.open(MainActivity.getDBPathName());
+            access.open(Main.getDBPathName());
         }
         return access;
     }//end createAccess
 
-    public static IPersistenceAccess getAccess(String dbName){
-        if(access==null){
-            throw new RuntimeException("Connection failed to "+dbName +" data access.");
+    public static IPersistenceAccess getAccess(String dbName) {
+        if (access == null) {
+            System.out.println("Connection to "+dbName+" data access has not been established.");
+            System.exit(1);
         }
         return access;
     }//end getAccess
 
-    public static void closeAccess(){
-        if(access!=null){
+    public static void closeAccess() {
+        if (access != null) {
             access.close();
         }
-        access=null;//set it to null to close
+        access = null;//set it to null to close
     }
 
 }
