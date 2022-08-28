@@ -98,7 +98,24 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         return people;
     }//end getPeople
 
+    @Override
+    public boolean isUnique(String name, String group) {
+        String where;
+        boolean res = false;
+        try {
+            where = "Name='" + name + "' and Group='" + group + "';";
+            cmdStr = "Select * from People where " + where;
+            updateCount = st2.executeUpdate(cmdStr);
+            if (updateCount == 0) {
+                res = true;
+            }
+        } catch (Exception e) {
+            processSQLError(e);
+        }
+        return res;
+    }//end isUnique
 
+    @Override
     public void rename(String name, String newName) {
         String values;
         String where;
@@ -117,7 +134,7 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         }
     }//end rename
 
-
+    @Override
     public void rePassword(String name, String newPassword) {
         String values;
         String where;
@@ -136,6 +153,7 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         }
     }//end rePassword
 
+    @Override
     public void reStatus(String name, boolean admin) {
         String values;
         String where;
@@ -160,6 +178,7 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         }
     }//end reStatus
 
+    @Override
     public boolean deletePerson(String name) {
         String values;
         boolean deleted = false;

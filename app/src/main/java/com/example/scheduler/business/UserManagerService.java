@@ -1,15 +1,17 @@
 package com.example.scheduler.business;
 
+import com.example.scheduler.application.Main;
+import com.example.scheduler.application.Service;
 import com.example.scheduler.objects.Person;
-import com.example.scheduler.persistence.IPersonPersistence;
+import com.example.scheduler.persistence.IPersistenceAccess;
 
 import java.util.ArrayList;
 
 public class UserManagerService {
-    private final IPersonPersistence access;
+    private IPersistenceAccess access;
 
     public UserManagerService() {
-        access = null;
+        access =  Service.getAccess(Main.dbName);
     }
 
     public Person addUser(Person person) {
