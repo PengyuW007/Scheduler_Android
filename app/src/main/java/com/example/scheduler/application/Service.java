@@ -2,8 +2,6 @@ package com.example.scheduler.application;
 
 import com.example.scheduler.persistence.IPersistenceAccess;
 import com.example.scheduler.persistence.real.PersonPersistenceDB;
-import com.example.scheduler.persistence.stub.PersonPersistence;
-import com.example.scheduler.presentation.MainActivity;
 
 public class Service {
     private static IPersistenceAccess access = null;

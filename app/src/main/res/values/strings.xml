@@ -25,6 +25,8 @@
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="username">Username</string>
+    <string name="fatalError">Fatal error</string>
+    <string name="warning">Warning</string>
 
     <string-array name="sections">
         <item>微生物组 /Microbiology</item>

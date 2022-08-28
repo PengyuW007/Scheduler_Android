@@ -33,7 +33,7 @@ public class Main {
         return res;
     }
 
-    public static void setDbPathName(String pathName) {
+    public static void setDBPathName(String pathName) {
         System.out.println("Setting DB path to: " + pathName);
         dbPath = pathName;
     }

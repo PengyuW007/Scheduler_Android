@@ -49,7 +49,7 @@ public class StartScheduleActivity extends AppCompatActivity implements View.OnC
             intent.setClass(getApplicationContext(), ScheduleActivity.class);
             startActivity(intent);
         } else if (view.getId() == R.id.start_button_previous) {
-            intent.setClass(getApplicationContext(), MainActivity.class);
+            intent.setClass(getApplicationContext(), HomeActivity.class);
             startActivity(intent);
         }
     }//end onClick

@@ -2,7 +2,6 @@ package com.example.scheduler.business;
 
 import com.example.scheduler.objects.Person;
 import com.example.scheduler.persistence.IPersonPersistence;
-import com.example.scheduler.presentation.MainActivity;
 
 import java.util.ArrayList;
 
