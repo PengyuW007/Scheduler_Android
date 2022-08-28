@@ -21,9 +21,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         copyDatabaseToDevice();
+        setContentView(R.layout.activity_main);
         Main.startUp();
         initializeUI();
-        setContentView(R.layout.activity_main);
     }
 
     @Override

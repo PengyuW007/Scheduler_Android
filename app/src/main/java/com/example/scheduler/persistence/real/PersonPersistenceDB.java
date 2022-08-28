@@ -6,7 +6,6 @@ import com.example.scheduler.persistence.IPersistenceAccess;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -35,9 +34,7 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         String values;
 
         try {
-            values = person.getName() + ", '" + person.getPassword()
-                    + "', '" + person.getGroup()
-                    + "'";
+            values = "'" + person.getName() + "', '" + person.getPassword() + "', '" + person.getGroup() + "','0'";
             cmdStr = "Insert into People " + " Values(" + values + ")";
             updateCount = st1.executeUpdate(cmdStr);
             result = checkWarning(st1, updateCount);
@@ -62,36 +59,126 @@ public class PersonPersistenceDB implements IPersistenceAccess {
             processSQLError(e);
         }
         return count;
-    }
+    }//end peopleCount
 
     public Person getPersonByName(String name) {
-        return null;
-    }
+        int len = people.size();
+        Person res = null;
+        for (int i = 0; i < len; i++) {
+            Person curr = people.get(i);
+            if (curr.getName().equalsIgnoreCase(name)) {
+                res = curr;
+            }
+        }
+        return res;
+    }//end getPersonByName
 
 
     public ArrayList<Person> getPeople() {
-        return null;
-    }
+        Person person;
+        String name = EOF, password = EOF, group = EOF;
+
+        people = new ArrayList<>();
+
+        try {
+            cmdStr = "Select * from People";
+            rs5 = st3.executeQuery(cmdStr);
+
+            while (rs5.next()) {
+                name = rs5.getString("Name");
+                password = rs5.getString("Password");
+                group = rs5.getString("Group");
+                person = new Person(name, password, group);
+                people.add(person);
+            }
+            rs5.close();
+        } catch (Exception e) {
+            processSQLError(e);
+        }
+        return people;
+    }//end getPeople
 
 
     public void rename(String name, String newName) {
+        String values;
+        String where;
 
-    }
+        try {
+            values = "Name='" + newName + "'";
+            where = "where Name='" + name + "'";
+            cmdStr = "Update People " + " Set " + values + " " + where;
+            updateCount = st1.executeUpdate(cmdStr);
+            checkWarning(st1, updateCount);
+
+            Person curr = getPersonByName(name);
+            curr.setName(newName);
+        } catch (Exception e) {
+            processSQLError(e);
+        }
+    }//end rename
 
 
     public void rePassword(String name, String newPassword) {
+        String values;
+        String where;
 
-    }
+        try {
+            values = "Password='" + newPassword + "'";
+            where = "where Name='" + name + "'";
+            cmdStr = "Update People " + " Set " + values + " " + where;
+            updateCount = st1.executeUpdate(cmdStr);
+            checkWarning(st1, updateCount);
 
+            Person curr = getPersonByName(name);
+            curr.setPassword(newPassword);
+        } catch (Exception e) {
+            processSQLError(e);
+        }
+    }//end rePassword
 
     public void reStatus(String name, boolean admin) {
+        String values;
+        String where;
+        int status;
 
-    }
+        try {
+            if (admin) {
+                status = 1;
+            } else {
+                status = 0;
+            }
+            values = "Admin='" + status + "'";
+            where = "where Name='" + name + "'";
+            cmdStr = "Update People " + " Set " + values + " " + where;
+            updateCount = st1.executeUpdate(cmdStr);
+            checkWarning(st1, updateCount);
 
+            Person curr = getPersonByName(name);
+            curr.setStatus(admin);
+        } catch (Exception e) {
+            processSQLError(e);
+        }
+    }//end reStatus
 
     public boolean deletePerson(String name) {
-        return false;
-    }
+        String values;
+        boolean deleted = false;
+        try {
+            values = name;
+            cmdStr = "Delete from People where Name=" + values;
+            //System.out.println(cmdString);
+            updateCount = st1.executeUpdate(cmdStr);
+            checkWarning(st1, updateCount);
+
+            Person curr = getPersonByName(name);
+            people.remove(curr);
+
+            deleted = true;
+        } catch (Exception e) {
+            processSQLError(e);
+        }
+        return deleted;
+    }//end deletePerson
 
     @Override
     public void open(String dbPath) {
@@ -156,7 +243,7 @@ public class PersonPersistenceDB implements IPersistenceAccess {
             processSQLError(e);
         }
         System.out.println("RealDB portal closed.");
-    }
+    }//end close
 
     public String checkWarning(Statement st, int updateCount) {
         String result;
@@ -174,7 +261,7 @@ public class PersonPersistenceDB implements IPersistenceAccess {
             result = "Tuple not inserted correctly.";
         }
         return result;
-    }
+    }//end checkWarning
 
     public String processSQLError(Exception e) {
         String result = "*** SQL Error: " + e.getMessage();
@@ -183,6 +270,5 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         e.printStackTrace();
 
         return result;
-    }
-
+    }//end processSQLError
 }
