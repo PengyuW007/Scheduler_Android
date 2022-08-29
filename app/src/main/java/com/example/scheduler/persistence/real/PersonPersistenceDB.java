@@ -212,40 +212,6 @@ public class PersonPersistenceDB implements IPersistenceAccess {
             st2 = connection.createStatement();
             st3 = connection.createStatement();
 
-            /*** Alternate setups for different DB engines, just given as examples. Don't use them. ***/
-
-            /*
-             * // Setup for SQLite. Note that this is undocumented and is not guaranteed to work.
-             * // See also: https://github.com/SQLDroid/SQLDroid
-             * dbType = "SQLite";
-             * Class.forName("SQLite.JDBCDriver").newInstance();
-             * url = "jdbc:sqlite:" + dbPath;
-             * c1 = DriverManager.getConnection(url);
-             *
-             * ... create statements
-             */
-
-            /*** The following two work on desktop builds: ***/
-
-            /*
-             * // Setup for Access
-             * dbType = "Access";
-             * Class.forName("sun.jdbc.odbc.JdbcOdbcDriver").newInstance();
-             * url = "jdbc:odbc:SC";
-             * c1 = DriverManager.getConnection(url,"userid","userpassword");
-             *
-             * ... create statements
-             */
-
-            /*
-             * //Setup for MySQL
-             * dbType = "MySQL";
-             * Class.forName("com.mysql.jdbc.Driver");
-             * url = "jdbc:mysql://localhost/database01";
-             * c1 = DriverManager.getConnection(url, "root", "");
-             *
-             * ... create statements
-             */
         } catch (Exception e) {
             processSQLError(e);
         }
