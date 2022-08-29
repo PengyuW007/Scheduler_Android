@@ -34,8 +34,8 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         String values;
 
         try {
-            values = "'" + person.getName() + "', '" + person.getPassword() + "', '" + person.getGroup() + "','0'";
-            cmdStr = "Insert into People " + " Values(" + values + ")";
+            values = "'" + person.getName() + "', '" + person.getPassword() + "', '" + person.getGroup() + "',0";
+            cmdStr = "Insert into PEOPLE " + " Values(" + values + ")";
             updateCount = st1.executeUpdate(cmdStr);
             result = checkWarning(st1, updateCount);
         } catch (Exception e) {
@@ -104,7 +104,7 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         boolean res = false;
         try {
             where = "Name='" + name + "' and Group='" + group + "';";
-            cmdStr = "Select * from People where " + where;
+            cmdStr = "Select * from PEOPLE where " + where;
             updateCount = st2.executeUpdate(cmdStr);
             if (updateCount == 0) {
                 res = true;
@@ -165,7 +165,7 @@ public class PersonPersistenceDB implements IPersistenceAccess {
             } else {
                 status = 0;
             }
-            values = "Admin='" + status + "'";
+            values = "Admin=" + status;
             where = "where Name='" + name + "'";
             cmdStr = "Update People " + " Set " + values + " " + where;
             updateCount = st1.executeUpdate(cmdStr);
@@ -249,7 +249,7 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         } catch (Exception e) {
             processSQLError(e);
         }
-        System.out.println(dbPath + "(realDB) connection has established successfully.");
+        System.out.println("Opened "+dbType+" and "+dbPath + "(realDB) connection has established successfully.");
     }//end open
 
     @Override
