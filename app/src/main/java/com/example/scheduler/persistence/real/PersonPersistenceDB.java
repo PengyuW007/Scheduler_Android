@@ -18,7 +18,7 @@ public class PersonPersistenceDB implements IPersistenceAccess {
     private final String DBPATH;
     private String dbType;
 
-    private ArrayList<Person> people;
+    private ArrayList<Person> people = new ArrayList<>();
 
     private String cmdStr;
     private int updateCount;
@@ -37,6 +37,8 @@ public class PersonPersistenceDB implements IPersistenceAccess {
             values = "'" + person.getName() + "', '" + person.getPassword() + "', '" + person.getGroup() + "',0";
             cmdStr = "Insert into PEOPLE " + " Values(" + values + ")";
             updateCount = st1.executeUpdate(cmdStr);
+            people.add(person);
+            System.out.println(people.size());
             result = checkWarning(st1, updateCount);
         } catch (Exception e) {
             result = processSQLError(e);
@@ -75,6 +77,7 @@ public class PersonPersistenceDB implements IPersistenceAccess {
 
 
     public ArrayList<Person> getPeople() {
+        /*
         Person person;
         String name = EOF, password = EOF, group = EOF;
 
@@ -95,6 +98,8 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         } catch (Exception e) {
             processSQLError(e);
         }
+
+         */
         return people;
     }//end getPeople
 
@@ -105,11 +110,10 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         try {
             where = "Name='" + name + "' and Section='" + group + "'";
             cmdStr = "Select count(*) AS total from PEOPLE where " + where;
-            System.out.println(cmdStr);
             rs2 = st1.executeQuery(cmdStr);
             int count = 0;
-            while(rs2.next()){
-                count =rs2.getInt("total");
+            while (rs2.next()) {
+                count = rs2.getInt("total");
             }
 
             if (count == 0) {
@@ -120,6 +124,28 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         }
         return res;
     }//end isUnique
+
+    @Override
+    public boolean isMatch(String name, String password) {
+        String where;
+        boolean res = false;
+        try {
+            where = "Name='" + name + "' and Password='" + password + "'";
+            cmdStr = "Select count(*) AS total from PEOPLE where " + where;
+            rs2 = st1.executeQuery(cmdStr);
+            int count = 0;
+            while (rs2.next()) {
+                count = rs2.getInt("total");
+            }
+
+            if (count > 0) {
+                res = true;
+            }
+        } catch (Exception e) {
+            processSQLError(e);
+        }
+        return res;
+    }
 
     @Override
     public void rename(String name, String newName) {

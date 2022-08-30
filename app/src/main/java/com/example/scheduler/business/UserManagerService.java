@@ -23,8 +23,12 @@ public class UserManagerService {
         return access.getPersonByName(name);
     }
 
-    public boolean isUnique(String name, String group) {
+    public boolean isSame(String name, String group) {
         return access.isSame(name, group);
+    }
+
+    public boolean isMatch(String name,String password){
+        return access.isMatch(name,password);
     }
 
     public Person rename(String name, String newName) {

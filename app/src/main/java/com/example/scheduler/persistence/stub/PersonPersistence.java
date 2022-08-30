@@ -56,6 +56,11 @@ public class PersonPersistence implements IPersistenceAccess {
         return unique;
     }
 
+    @Override
+    public boolean isMatch(String name, String password) {
+        return false;
+    }
+
     /*** UPDATE ***/
     @Override
     public void rename(String name, String newName) {

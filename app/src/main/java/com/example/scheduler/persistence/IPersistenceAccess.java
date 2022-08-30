@@ -22,6 +22,8 @@ public interface IPersistenceAccess {
 
     boolean isSame(String name,String group);
 
+    boolean isMatch(String name,String password);
+
     /*** UPDATE ***/
     void rename(String name, String newName);
 

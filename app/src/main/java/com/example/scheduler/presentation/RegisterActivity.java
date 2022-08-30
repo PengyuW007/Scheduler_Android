@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,7 +57,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         Intent intent = new Intent(this, HomeActivity.class);
         if (view.getId() == R.id.signUp_login_button) {
             dataReceivedDB(intent);
-            startActivity(intent);
         }
     }
 
@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         sectionGet = sections[sectionsPicker.getValue()];
         Log.i("section_here", sectionGet);
 
-        boolean isUnique = userService.isUnique(nameGet, sectionGet);
+        boolean isUnique = userService.isSame(nameGet, sectionGet);
 
         if (isUnique) {
             person = new Person(nameGet, passwordGet, sectionGet);
@@ -79,13 +79,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             intent.putExtra("register_name_receive", nameGet);
             intent.putExtra("register_password_receive", passwordGet);
             intent.putExtra("register_section_receive", sectionGet);
+            startActivity(intent);
+        }else {
+            Toast.makeText(RegisterActivity.this,"User name has existed, please change another name!",Toast.LENGTH_LONG).show();
         }
 
     }
 
     private void dataReceived(Intent intent) {
         String nameStr = "AA", passwordStr = "aa", groupGet = "11";
-        boolean isUnique = userService.isUnique(nameStr, groupGet);
+        boolean isUnique = userService.isSame(nameStr, groupGet);
 
         System.out.println("Size before: "+userService.getPeople().size());
         if (isUnique) {
