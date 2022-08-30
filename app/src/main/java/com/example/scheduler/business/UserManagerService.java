@@ -24,7 +24,7 @@ public class UserManagerService {
     }
 
     public boolean isUnique(String name, String group) {
-        return access.isUnique(name, group);
+        return access.isSame(name, group);
     }
 
     public Person rename(String name, String newName) {

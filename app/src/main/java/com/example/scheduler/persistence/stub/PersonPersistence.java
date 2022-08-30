@@ -43,7 +43,7 @@ public class PersonPersistence implements IPersistenceAccess {
     }
 
     @Override
-    public boolean isUnique(String name, String group) {
+    public boolean isSame(String name, String group) {
         boolean unique = false;
         int len = people.size();
         for (int i = 0; i < len; i++) {

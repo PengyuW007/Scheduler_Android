@@ -20,7 +20,7 @@ public interface IPersistenceAccess {
 
     ArrayList<Person> getPeople();
 
-    boolean isUnique(String name,String group);
+    boolean isSame(String name,String group);
 
     /*** UPDATE ***/
     void rename(String name, String newName);

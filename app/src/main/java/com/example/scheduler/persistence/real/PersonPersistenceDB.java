@@ -87,7 +87,7 @@ public class PersonPersistenceDB implements IPersistenceAccess {
             while (rs5.next()) {
                 name = rs5.getString("Name");
                 password = rs5.getString("Password");
-                group = rs5.getString("Group");
+                group = rs5.getString("Section");
                 person = new Person(name, password, group);
                 people.add(person);
             }
@@ -99,14 +99,20 @@ public class PersonPersistenceDB implements IPersistenceAccess {
     }//end getPeople
 
     @Override
-    public boolean isUnique(String name, String group) {
+    public boolean isSame(String name, String group) {
         String where;
         boolean res = false;
         try {
-            where = "Name='" + name + "' and Group='" + group + "';";
-            cmdStr = "Select * from PEOPLE where " + where;
-            updateCount = st2.executeUpdate(cmdStr);
-            if (updateCount == 0) {
+            where = "Name='" + name + "' and Section='" + group + "'";
+            cmdStr = "Select count(*) AS total from PEOPLE where " + where;
+            System.out.println(cmdStr);
+            rs2 = st1.executeQuery(cmdStr);
+            int count = 0;
+            while(rs2.next()){
+                count =rs2.getInt("total");
+            }
+
+            if (count == 0) {
                 res = true;
             }
         } catch (Exception e) {
@@ -215,7 +221,7 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         } catch (Exception e) {
             processSQLError(e);
         }
-        System.out.println("Opened "+dbType+" and "+dbPath + "(realDB) connection has established successfully.");
+        System.out.println("Opened " + dbType + " and " + dbPath + "(realDB) connection has established successfully.");
     }//end open
 
     @Override
