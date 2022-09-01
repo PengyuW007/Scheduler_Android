@@ -38,7 +38,7 @@ public class PersonPersistenceDB implements IPersistenceAccess {
             cmdStr = "Insert into PEOPLE " + " Values(" + values + ")";
             updateCount = st1.executeUpdate(cmdStr);
             people.add(person);
-            System.out.println(people.size());
+            System.out.println(person.getName()+" "+person.getPassword()+" "+person.getGroup());
             result = checkWarning(st1, updateCount);
         } catch (Exception e) {
             result = processSQLError(e);
