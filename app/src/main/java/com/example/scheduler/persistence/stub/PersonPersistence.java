@@ -94,6 +94,11 @@ public class PersonPersistence implements IPersistenceAccess {
         return delete;
     }
 
+    @Override
+    public void clearPeople() {
+        people.clear();
+    }
+
 
     /***********************
      *** Override methods ***

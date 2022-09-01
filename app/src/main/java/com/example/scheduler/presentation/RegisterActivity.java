@@ -61,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void dataReceivedDB(Intent intent) {
-        Person person = null;
+        Person person;
         /*** data received ***/
         nameGet = name.getText().toString();
         passwordGet = password.getText().toString();

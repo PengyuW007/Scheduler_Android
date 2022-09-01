@@ -33,4 +33,6 @@ public interface IPersistenceAccess {
 
     /*** DELETE ***/
     boolean deletePerson(String name);
+
+    void clearPeople();
 }

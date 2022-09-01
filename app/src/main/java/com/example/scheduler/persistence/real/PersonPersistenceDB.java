@@ -1,5 +1,7 @@
 package com.example.scheduler.persistence.real;
 
+import android.util.Log;
+
 import com.example.scheduler.objects.Person;
 import com.example.scheduler.persistence.IPersistenceAccess;
 
@@ -11,25 +13,24 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class PersonPersistenceDB implements IPersistenceAccess {
-    private Statement st1, st2, st3;
+    private Statement st1, st2;
     private Connection connection;
-    private ResultSet rs1, rs2, rs3, rs4, rs5;
+    private ResultSet rs1, rs2;
 
     private final String DBPATH;
     private String dbType;
 
-    private ArrayList<Person> people = new ArrayList<>();
+    private ArrayList<Person> people;
 
     private String cmdStr;
     private int updateCount;
-    private String result;
-    private static String EOF = " ";
 
     public PersonPersistenceDB(String dbPath) {
-        DBPATH = dbPath;
+        this.DBPATH = dbPath;
+        people = new ArrayList<>();
     }
 
-
+    @Override
     public int addPerson(Person person) {
         String values;
 
@@ -38,10 +39,9 @@ public class PersonPersistenceDB implements IPersistenceAccess {
             cmdStr = "Insert into PEOPLE " + " Values(" + values + ")";
             updateCount = st1.executeUpdate(cmdStr);
             people.add(person);
-            System.out.println(person.getName()+" "+person.getPassword()+" "+person.getGroup());
-            result = checkWarning(st1, updateCount);
+            checkWarning(st1, updateCount);
         } catch (Exception e) {
-            result = processSQLError(e);
+            processSQLError(e);
         }
         return peopleCount();
     }//end addPerson
@@ -63,6 +63,7 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         return count;
     }//end peopleCount
 
+    @Override
     public Person getPersonByName(String name) {
         int len = people.size();
         Person res = null;
@@ -75,32 +76,32 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         return res;
     }//end getPersonByName
 
-
+    @Override
     public ArrayList<Person> getPeople() {
-        /*
+        ArrayList<Person> res = new ArrayList<>();
         Person person;
-        String name = EOF, password = EOF, group = EOF;
+        String name, password, group;
 
         people = new ArrayList<>();
 
         try {
             cmdStr = "Select * from People";
-            rs5 = st3.executeQuery(cmdStr);
+            rs1 = st2.executeQuery(cmdStr);
 
-            while (rs5.next()) {
-                name = rs5.getString("Name");
-                password = rs5.getString("Password");
-                group = rs5.getString("Section");
+            while (rs1.next()) {
+                name = rs1.getString("Name");
+                password = rs1.getString("Password");
+                group = rs1.getString("Section");
                 person = new Person(name, password, group);
-                people.add(person);
+                res.add(person);
             }
-            rs5.close();
+            rs1.close();
         } catch (Exception e) {
             processSQLError(e);
         }
 
-         */
-        return people;
+
+        return res;
     }//end getPeople
 
     @Override
@@ -217,7 +218,6 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         try {
             values = name;
             cmdStr = "Delete from People where Name=" + values;
-            //System.out.println(cmdString);
             updateCount = st1.executeUpdate(cmdStr);
             checkWarning(st1, updateCount);
 
@@ -232,6 +232,19 @@ public class PersonPersistenceDB implements IPersistenceAccess {
     }//end deletePerson
 
     @Override
+    public void clearPeople() {
+        try {
+            cmdStr = "Delete from People" ;
+            updateCount = st1.executeUpdate(cmdStr);
+            checkWarning(st1, updateCount);
+
+            people.clear();
+        } catch (Exception e) {
+            processSQLError(e);
+        }
+    }
+
+    @Override
     public void open(String dbPath) {
         String url;
         try {
@@ -242,7 +255,6 @@ public class PersonPersistenceDB implements IPersistenceAccess {
             connection = DriverManager.getConnection(url, "SA", "");
             st1 = connection.createStatement();
             st2 = connection.createStatement();
-            st3 = connection.createStatement();
 
         } catch (Exception e) {
             processSQLError(e);
@@ -262,22 +274,19 @@ public class PersonPersistenceDB implements IPersistenceAccess {
         System.out.println("RealDB portal closed.");
     }//end close
 
-    public String checkWarning(Statement st, int updateCount) {
-        String result;
-
-        result = null;
+    public void checkWarning(Statement st, int updateCount) {
         try {
             SQLWarning warning = st.getWarnings();
             if (warning != null) {
-                result = warning.getMessage();
+                Log.w("Warning Message", warning.getMessage());
             }
         } catch (Exception e) {
-            result = processSQLError(e);
+            Log.e("processSQLError", processSQLError(e));
         }
         if (updateCount != 1) {
-            result = "Tuple not inserted correctly.";
+            //"Tuple not inserted correctly."
+            Log.i("Tuple not inserted correctly.", "Tuple not inserted correctly.");
         }
-        return result;
     }//end checkWarning
 
     public String processSQLError(Exception e) {
@@ -288,4 +297,6 @@ public class PersonPersistenceDB implements IPersistenceAccess {
 
         return result;
     }//end processSQLError
+
+
 }
