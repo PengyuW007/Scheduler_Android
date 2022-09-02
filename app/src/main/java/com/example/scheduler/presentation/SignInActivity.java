@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.scheduler.R;
 import com.example.scheduler.business.UserManagerService;
+import com.example.scheduler.objects.Person;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
     private String[] status;
@@ -59,36 +60,54 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(this, StartScheduleActivity.class);
-
-        if (view.getId() == R.id.signIn_login_button) {
+        Intent intent = new Intent();
+        if (view.getId() == R.id.signIn_login_button)
             dataReceived(intent);
-        }
     }
 
     private void dataReceived(Intent intent) {
         /*** Edit text ***/
         nameGet = name.getText().toString();
-        passwordGet = password.getText().toString();
-        Log.i("signIn_name_here", nameGet);
-        Log.i("signIn_password_here", passwordGet);
-        boolean isMatch = userService.isMatch(nameGet, passwordGet);
-        if (isMatch) {
-            statusGet = status[adminPicker.getValue()];
-            Log.i("signIn_status_here", statusGet);
-            intent.putExtra("signIn_status_receive", statusGet);
-            reStatus(nameGet,statusGet);
-            startActivity(intent);
+        if (nameGet.matches("")) {
+            Toast.makeText(SignInActivity.this, "Please type in your name!", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(SignInActivity.this, "Your username or password is incorrect, please try again!", Toast.LENGTH_LONG).show();
+            passwordGet = password.getText().toString();
+            if (passwordGet.matches("")) {
+                Toast.makeText(SignInActivity.this, "Please type in your password!", Toast.LENGTH_LONG).show();
+            } else {
+                Log.i("signIn_name_here", nameGet);
+                Log.i("signIn_password_here", passwordGet);
+                boolean isMatch = userService.isMatch(nameGet, passwordGet);
+                if (isMatch) {
+                    statusGet = status[adminPicker.getValue()];
+                    Log.i("signIn_status_here", statusGet);
+                    intent.putExtra("signIn_status_receive", statusGet);
+                    if (statusGet.equalsIgnoreCase("否 /No")) {
+                        intent.setClass(getApplicationContext(), ScheduleActivity.class);
+                    } else if (statusGet.equalsIgnoreCase("是 /Yes")) {
+                        Person person = userService.getUserByName(nameGet);
+                        boolean personStatus = person.getStatus();
+
+                        if (personStatus) {
+                            intent.setClass(getApplicationContext(), ScheduleActivity.class);
+                        } else {
+                            reStatus(nameGet, statusGet);
+                            intent.setClass(getApplicationContext(), StartScheduleActivity.class);
+                        }
+                    }
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(SignInActivity.this, "Your username or password is incorrect, please try again!", Toast.LENGTH_LONG).show();
+                }
+            }
         }
     }//end dataReceived
 
-    private void reStatus(String nameRec,String statusRec){
-        if(statusRec==status[0]){
-            userService.reStatus(nameRec,false);
-        }else if(statusRec==status[1]){
-            userService.reStatus(nameRec,true);
+    private void reStatus(String nameRec, String statusRec) {
+        if (statusRec.equals(status[0])) {
+            userService.reStatus(nameRec, false);
+        } else if (statusRec.equals(status[1])) {
+            userService.reStatus(nameRec, true);
         }
     }
 }

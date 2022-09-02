@@ -1,9 +1,11 @@
 package com.example.scheduler.presentation;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
@@ -64,25 +66,40 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         Person person;
         /*** data received ***/
         nameGet = name.getText().toString();
-        passwordGet = password.getText().toString();
-        Log.i("name_here", nameGet);
-        Log.i("password_here", passwordGet);
-        sectionGet = sections[sectionsPicker.getValue()];
-        Log.i("section_here", sectionGet);
+        if (nameGet.matches("")) {
+            Toast.makeText(RegisterActivity.this, "Please type in your name!", Toast.LENGTH_LONG).show();
+        } else {
+            passwordGet = password.getText().toString();
+            if (passwordGet.matches("")) {
+                Toast.makeText(RegisterActivity.this, "Please type in your password!", Toast.LENGTH_LONG).show();
+            } else {
 
-        boolean isUnique = userService.isSame(nameGet, sectionGet);
+                sectionGet = sections[sectionsPicker.getValue()];
+                Log.i("name_here", nameGet);
+                Log.i("password_here", passwordGet);
+                Log.i("section_here", sectionGet);
 
-        if (isUnique) {
-            person = new Person(nameGet, passwordGet, sectionGet);
-            userService.addUser(person);
+                boolean isUnique = userService.isSame(nameGet, sectionGet);
 
-            intent.putExtra("register_name_receive", nameGet);
-            intent.putExtra("register_password_receive", passwordGet);
-            intent.putExtra("register_section_receive", sectionGet);
-            startActivity(intent);
-        }else {
-            Toast.makeText(RegisterActivity.this,"User name has existed, please change another name!",Toast.LENGTH_LONG).show();
+                if (isUnique) {
+                    person = new Person(nameGet, passwordGet, sectionGet);
+                    userService.addUser(person);
+
+                    intent.putExtra("register_name_receive", nameGet);
+                    intent.putExtra("register_password_receive", passwordGet);
+                    intent.putExtra("register_section_receive", sectionGet);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(RegisterActivity.this, "User name has existed, please change another name!", Toast.LENGTH_LONG).show();
+                }
+
+            }
         }
+    }//end dataReceivedDB
+
+    private void closeKeyboard(View view) {
+        InputMethodManager imm =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
     }
 
@@ -90,11 +107,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String nameStr = "AA", passwordStr = "aa", groupGet = "11";
         boolean isUnique = userService.isSame(nameStr, groupGet);
 
-        System.out.println("Size before: "+userService.getPeople().size());
+        System.out.println("Size before: " + userService.getPeople().size());
         if (isUnique) {
             Person person = new Person(nameStr, passwordStr, groupGet);
             userService.addUser(person);
-            System.out.println("Size after: "+userService.getPeople().size());
+            System.out.println("Size after: " + userService.getPeople().size());
         }
     }
 }

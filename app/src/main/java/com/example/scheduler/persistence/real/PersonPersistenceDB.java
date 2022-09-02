@@ -66,7 +66,7 @@ public class PersonPersistenceDB implements IPersistenceAccess {
     @Override
     public Person getPersonByName(String name) {
         int len = people.size();
-        Person res = null;
+        Person res = new Person();
         for (int i = 0; i < len; i++) {
             Person curr = people.get(i);
             if (curr.getName().equalsIgnoreCase(name)) {
