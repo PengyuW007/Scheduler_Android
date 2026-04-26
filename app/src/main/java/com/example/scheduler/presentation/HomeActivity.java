@@ -1,104 +1,76 @@
 package com.example.scheduler.presentation;
 
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.AssetManager;
-import android.os.Bundle;
-import android.view.View;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-import com.example.scheduler.R;
-import com.example.scheduler.application.Main;
+public class HomeActivity extends AppCompatActivity {
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
+    // MySQL Connection Details
+    // 10.0.2.2 is the IP used by the Android Emulator to reach your computer's localhost
+    private static final String DB_URL = "jdbc:mysql://10.0.2.2:3306/your_database_name";
+    private static final String USER = "your_username";
+    private static final String PASS = "your_password";
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+    private TextView statusText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        copyDatabaseToDevice();
-        setContentView(R.layout.activity_main);
-        Main.startUp();
-        initializeUI();
+
+        // Start the MySQL connection process
+        fetchDataFromMySQL();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Main.shutDown();
-    }
+    private void fetchDataFromMySQL() {
+        // Create a background thread executor
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
 
-    private void copyDatabaseToDevice() {
-        final String DB_PATH = "db";
+        executor.execute(() -> {
+            // --- BACKGROUND THREAD ---
+            String resultMessage;
+            try {
+                // 1. Load the MySQL Driver
+                Class.forName("com.mysql.cj.jdbc.Driver");
 
-        String[] assetNames;
-        Context context = getApplicationContext();
-        File dataDirectory = context.getDir(DB_PATH, Context.MODE_PRIVATE);
-        AssetManager assetManager = getAssets();
+                // 2. Establish Connection
+                Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-        try {
+                // 3. Execute a simple query
+                Statement statement = conn.createStatement();
+                ResultSet resultSet = statement.executeQuery("SELECT VERSION()");
 
-            assetNames = assetManager.list(DB_PATH);
-            for (int i = 0; i < assetNames.length; i++) {
-                assetNames[i] = DB_PATH + "/" + assetNames[i];
-            }
-
-            copyAssetsToDirectory(assetNames, dataDirectory);
-
-            Main.setDBPathName(dataDirectory.toString() + "/" + Main.dbName);
-
-        } catch (IOException ioe) {
-            Messages.warning(this, "Unable to access application data: " + ioe.getMessage());
-        }
-    }//end copyDatabaseToDevice
-
-    public void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
-        AssetManager assetManager = getAssets();
-
-        for (String asset : assets) {
-            String[] components = asset.split("/");
-            String copyPath = directory.toString() + "/" + components[components.length - 1];
-            char[] buffer = new char[1024];
-            int count;
-
-            File outFile = new File(copyPath);
-
-            if (!outFile.exists()) {
-                InputStreamReader in = new InputStreamReader(assetManager.open(asset));
-                FileWriter out = new FileWriter(outFile);
-
-                count = in.read(buffer);
-                while (count != -1) {
-                    out.write(buffer, 0, count);
-                    count = in.read(buffer);
+                if (resultSet.next()) {
+                    resultMessage = "Connected! MySQL Version: " + resultSet.getString(1);
+                } else {
+                    resultMessage = "Connected, but query failed.";
                 }
 
-                out.close();
-                in.close();
+                conn.close();
+
+            } catch (Exception e) {
+                Log.e("MySQL_ERROR", "Connection failed", e);
+                resultMessage = "Error: " + e.getMessage();
             }
-        }
-    }//end copyAssetsToDirectory
 
-    private void initializeUI() {
-        // Button reactions //
-        findViewById(R.id.register_button).setOnClickListener(this);
-        findViewById(R.id.signIn_button).setOnClickListener(this);
-    }//end initializeUI
-
-    @Override
-    public void onClick(View view) {
-        Intent intent = new Intent();
-        if (view.getId() == R.id.register_button) {
-            intent.setClass(getApplicationContext(), RegisterActivity.class);
-        } else if (view.getId() == R.id.signIn_button) {
-            intent.setClass(getApplicationContext(), SignInActivity.class);
-        }
-        startActivity(intent);
+            // --- SWITCH BACK TO UI THREAD ---
+            String finalResult = resultMessage;
+            handler.post(() -> {
+                statusText.setText(finalResult);
+                Toast.makeText(HomeActivity.this, finalResult, Toast.LENGTH_LONG).show();
+            });
+        });
     }
-
-
 }
